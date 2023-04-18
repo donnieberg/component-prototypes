@@ -7,7 +7,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/*
+ * ===========================================================
+ * Spacing
+ */
+.pam { padding: 1rem; }
+.phm { padding-left: 1rem; padding-right: 1rem; }
+.pvm { padding-top: 1rem; padding-bottom: 1rem; }
+.mam { margin: 1rem; }
+.mhm { margin-left: 1rem; margin-right: 1rem; }
+.mvm { margin-top: 1rem; margin-bottom: 1rem; }
+
+
+/*
+ * ===========================================================
+ * Display
+ */
+.df { display: flex; }
+.df-baseline { align-items: baseline; }
+
+
+/*
+ * ===========================================================
+ * Colors & Styles
+ */
+.bg-white { background-color: white; }

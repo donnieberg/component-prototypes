@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import OverflowTabMenu from './overflowTabMenu.js';
+import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
 
 function Tabs() {
@@ -19,21 +19,16 @@ function Tabs() {
 
     const handleKeyDown = (index) => {
         return (e) => {
-
+            let nextFocusTab;
             if(e.keyCode == utils.keys.right) {
-                const nextTab = currentData[index + 1];
-                const nextEl = document.getElementById(nextTab.id);
-                if(nextEl) {
-                    nextEl.focus()
-                    setcurrentTab(currentTab = nextTab)
-                }
+                nextFocusTab = currentData[index + 1];
             } else if (e.keyCode == utils.keys.left) {
-                const prevTab = currentData[index - 1];
-                const prevEl = prevTab && document.getElementById(prevTab.id);
-                if(prevEl) {
-                    prevEl.focus();
-                    setcurrentTab(currentTab = prevTab)
-                }
+                nextFocusTab = currentData[index - 1];
+            }
+            const nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
+            if(nextFocusEl) {
+                nextFocusEl.focus()
+                setcurrentTab(currentTab = nextFocusTab)
             }
         }
     };
@@ -81,7 +76,7 @@ function Tabs() {
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
                 <li className="slds-tabs_default__item slds-tabs_default__overflow-button" title="More Tabs" role="presentation">
-                    <OverflowTabMenu />
+                    <DropdownMenu data={currentData.slice(4)} />
                 </li>
             </ul>
             {tabContent}
