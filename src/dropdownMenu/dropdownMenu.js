@@ -5,9 +5,19 @@ import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 function DropdownMenu({ data, useReactRouter, label }) {
     let [open, setOpen] = useState(false);
 
+    const toggleMenu = () => {
+        setOpen(open = !open)
+    };
+
+    const selectMenuItem = (item) => {
+        return () => {
+            toggleMenu();
+        }
+    };
+
     const menuItems = data.map(item => 
         <li key={item.id} className="slds-dropdown__item" role="presentation">
-            <a href="#" role="menuitem" tabIndex="-1">
+            <a href="#" role="menuitem" tabIndex="-1" onClick={selectMenuItem(item)}>
                 <span className="slds-truncate">{item.title}</span>
             </a>
         </li>
@@ -15,13 +25,9 @@ function DropdownMenu({ data, useReactRouter, label }) {
 
     const navItems = data.map(item => 
         <li key={item.id} className="slds-dropdown__item" role="presentation">
-            <Link to={`/${item.link}`}>{item.title}</Link>
+            <Link to={`/${item.link}`} onClick={selectMenuItem(item)}>{item.title}</Link>
         </li>
     );
-
-    const toggleMenu = () => {
-        setOpen(open = !open)
-    };
 
     return (
         <div className={classNames("slds-dropdown-trigger slds-dropdown-trigger_click", {"slds-is-open": open})}>
@@ -32,7 +38,8 @@ function DropdownMenu({ data, useReactRouter, label }) {
                 </ul>
             </div>
         </div>
-    );
+    )
+
 }
 
 export default DropdownMenu;

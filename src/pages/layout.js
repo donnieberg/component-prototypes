@@ -5,8 +5,8 @@ import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 
 const LayoutPage = () => {
     const tabLinkData = [
-        { index: 0, id: '0_tab', title: 'separate overflow', content: '', link: 'overflowButton' },
-        { index: 1, id: '1_tab', title: 'overflow part of ul', content: '', link: 'overflowList' },
+        { index: 0, id: '0_tab', title: 'heading', content: '', link: 'heading' },
+        { index: 1, id: '1_tab', title: 'nav', content: '', link: 'nav' },
     ];
     return (
         <div>

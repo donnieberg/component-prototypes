@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
 
-function Tabs() {
+function Tabs({ variant }) {
     const tabData = [
         { index: 0, id: '0_tab', title: 'Accounts', content: 'content for accounts' },
         { index: 1, id: '1_tab', title: 'Approvals', content: 'content for Approvals' },
@@ -75,8 +75,11 @@ function Tabs() {
         <div className="slds-tabs_default">
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
-                <li className="slds-tabs_default__item slds-tabs_default__overflow-button" title="More Tabs" role="presentation">
-                    <DropdownMenu data={currentData.slice(4)} />
+                <li className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
+                    <DropdownMenu 
+                        data={currentData.slice(4)} 
+                        label="More"
+                        />
                 </li>
             </ul>
             {tabContent}
