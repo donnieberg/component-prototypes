@@ -44,8 +44,8 @@ function Tabs({ variant }) {
                 role="presentation">
                 <a className="slds-tabs_default__link" href="#" 
                     role="tab" 
-                    tabIndex="0" 
-                    aria-selected="true" 
+                    tabIndex={currentTab.index == data.index ? "0" : "-1"} 
+                    aria-selected={currentTab.index == data.index ? "true" : "false"}
                     aria-controls={`tab-default-${data.index}`}
                     onKeyDown={handleKeyDown(data.index)}
                     id={data.id}>
