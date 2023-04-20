@@ -1,42 +1,43 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
+import utils from '../utils.js';
+import Menu from './menu.js';
 
 function DropdownMenu({ data, useReactRouter, label }) {
     let [open, setOpen] = useState(false);
+    let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
 
     const toggleMenu = () => {
         setOpen(open = !open)
     };
 
-    const selectMenuItem = (item) => {
-        return () => {
-            toggleMenu();
+
+    const handleKeyDownButton = (e) => {
+            if(e.keyCode == utils.keys.down) {
+                setOpen(open = true);
+            }
+    };
+
+    const handleKeyDownMenu = (item) => {
+        return (e) => {
+            if(e.keyCode == utils.keys.down && currentFocusIndex < data.length - 1) {
+                setCurrentFocusIndex(currentFocusIndex + 1)
+            } else if(e.keyCode == utils.keys.up && currentFocusIndex > 0) {
+                setCurrentFocusIndex(currentFocusIndex - 1)
+            } else if(e.keyCode == utils.keys.enter) {
+                setTimeout(() => {
+                    toggleMenu()
+                }, 0);
+            }
         }
     };
 
-    const menuItems = data.map(item => 
-        <li key={item.id} className="slds-dropdown__item" role="presentation">
-            <a href="#" role="menuitem" tabIndex="-1" onClick={selectMenuItem(item)}>
-                <span className="slds-truncate">{item.title}</span>
-            </a>
-        </li>
-    );
-
-    const navItems = data.map(item => 
-        <li key={item.id} className="slds-dropdown__item" role="presentation">
-            <Link to={`/${item.link}`} onClick={selectMenuItem(item)}>{item.title}</Link>
-        </li>
-    );
 
     return (
         <div className={classNames("slds-dropdown-trigger slds-dropdown-trigger_click", {"slds-is-open": open})}>
-            <button className="slds-button" aria-haspopup="true" onClick={toggleMenu}>{label}</button>
-            <div className="slds-dropdown slds-dropdown_left">
-                <ul className="slds-dropdown__list slds-dropdown_length-with-icon-10" role="menu">
-                    { useReactRouter ? navItems : menuItems }
-                </ul>
-            </div>
+            <button className="slds-button" aria-haspopup="true" onKeyDown={handleKeyDownButton} onClick={toggleMenu}>{label}</button>
+            {open ? <Menu data={data} useReactRouter={useReactRouter} handleKeyDownMenu={handleKeyDownMenu} currentFocusIndex={currentFocusIndex} /> : null}
         </div>
     )
 

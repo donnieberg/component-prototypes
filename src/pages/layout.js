@@ -16,7 +16,10 @@ const LayoutPage = () => {
                         <Link to="/">Home</Link>
                     </li>
                     <li className="phm">
-                        <DropdownMenu label="tabset" useReactRouter={true} data={tabLinkData} />
+                        <DropdownMenu 
+                            label="tabset" 
+                            useReactRouter={true} 
+                            data={tabLinkData} />
                     </li>
                 </ul>
             </nav>
