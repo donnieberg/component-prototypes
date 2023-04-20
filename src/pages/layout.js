@@ -6,7 +6,7 @@ import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 const LayoutPage = () => {
     const tabLinkData = [
         { index: 0, id: '0_tab', title: 'heading', content: '', link: 'heading' },
-        { index: 1, id: '1_tab', title: 'nav', content: '', link: 'nav' },
+        { index: 1, id: '1_tab', title: 'landmark', content: '', link: 'landmark' },
     ];
     return (
         <div>

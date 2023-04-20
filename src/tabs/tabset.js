@@ -71,8 +71,15 @@ function Tabs({ variant }) {
         )
     });
 
+    const renderHeading = () => {
+        if(variant == 'heading') {
+            return <h2 className="slds-assistive-text">Tabs</h2>
+        }
+    };
+
     return (
-        <div className="slds-tabs_default">
+        <div className="slds-tabs_default" role={ variant == 'landmark' ? 'article' : 'none' }>
+            {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
                 <li className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">

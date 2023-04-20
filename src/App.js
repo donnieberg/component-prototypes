@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<LayoutPage />}>
           <Route index element={<HomePage />} />
           <Route path="heading" element={<TabsPage1 />} />
-          <Route path="nav" element={<TabsPage2 />} />
+          <Route path="landmark" element={<TabsPage2 />} />
         </Route>
       </Routes>
     </BrowserRouter>

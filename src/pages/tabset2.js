@@ -4,8 +4,8 @@ import Tabset from '../tabs/tabset.js'
 const TabsPage2 = () => {
     return (
         <div>
-            <h1>Tabset with nav tag</h1>
-            <Tabset variant="nav" />
+            <h1>Tabset with landmark</h1>
+            <Tabset variant="landmark" />
         </div>
     );
 };
