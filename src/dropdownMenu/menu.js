@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import MenuItem from './menuItem.js';
 
-function Menu({ data, useReactRouter, handleKeyDownMenu, currentFocusIndex }) {
+function Menu({ data, useReactRouter, handleOnClick, handleKeyDownMenu, currentFocusIndex }) {
     const menuItems = data.map((item, index) => {
         return <MenuItem 
             key={item.id} 
@@ -11,6 +11,7 @@ function Menu({ data, useReactRouter, handleKeyDownMenu, currentFocusIndex }) {
             index={index}
             currentFocusIndex={currentFocusIndex}
             handleKeyDown={handleKeyDownMenu}
+            handleOnClick={handleOnClick}
             useReactRouter={useReactRouter} />;
     });
 

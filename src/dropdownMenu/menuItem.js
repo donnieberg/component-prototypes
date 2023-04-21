@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 
 function MenuItem(props) {
-    const { item, index, currentFocusIndex, useReactRouter, handleKeyDown } = props;
+    const { item, index, currentFocusIndex, useReactRouter, handleOnClick, handleKeyDown } = props;
     const ref = useRef(null);
     useEffect(() => {
         if(index == currentFocusIndex) {
@@ -25,6 +25,7 @@ function MenuItem(props) {
                     tabIndex="-1"
                     ref={ref}
                     onKeyDown={handleKeyDown(item)}
+                    onClick={handleOnClick(item)}
                 >
                     <span className="slds-truncate">{item.title}</span>
                 </a>

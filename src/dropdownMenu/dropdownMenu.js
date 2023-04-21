@@ -19,6 +19,12 @@ function DropdownMenu({ data, useReactRouter, label, handleMenuSelection }) {
             }
     };
 
+    const handleOnClickMenu = (item) => {
+        return () => {
+            handleMenuSelection(item)
+        }
+    };
+
     const handleKeyDownMenu = (item) => {
         return (e) => {
             if(e.keyCode == utils.keys.down && currentFocusIndex < data.length - 1) {
@@ -40,7 +46,7 @@ function DropdownMenu({ data, useReactRouter, label, handleMenuSelection }) {
     return (
         <div className={classNames("slds-dropdown-trigger slds-dropdown-trigger_click", {"slds-is-open": open})}>
             <button className="slds-button" aria-haspopup="true" onKeyDown={handleKeyDownButton} onClick={toggleMenu}>{label}</button>
-            {open ? <Menu data={data} useReactRouter={useReactRouter} handleKeyDownMenu={handleKeyDownMenu} currentFocusIndex={currentFocusIndex} /> : null}
+            {open ? <Menu data={data} useReactRouter={useReactRouter} handleKeyDownMenu={handleKeyDownMenu} handleOnClick={handleOnClickMenu} currentFocusIndex={currentFocusIndex} /> : null}
         </div>
     )
 
