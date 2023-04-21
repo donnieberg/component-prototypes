@@ -4,7 +4,7 @@ import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import utils from '../utils.js';
 import Menu from './menu.js';
 
-function DropdownMenu({ data, useReactRouter, label }) {
+function DropdownMenu({ data, useReactRouter, label, handleMenuSelection }) {
     let [open, setOpen] = useState(false);
     let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
 
@@ -26,6 +26,9 @@ function DropdownMenu({ data, useReactRouter, label }) {
             } else if(e.keyCode == utils.keys.up && currentFocusIndex > 0) {
                 setCurrentFocusIndex(currentFocusIndex - 1)
             } else if(e.keyCode == utils.keys.enter) {
+                if(!useReactRouter) {
+                    handleMenuSelection(item.index)
+                }
                 setTimeout(() => {
                     toggleMenu()
                 }, 0);

@@ -14,8 +14,8 @@ function Tabs({ variant }) {
         { index: 6, id: '6_tab', title: 'Favorites', content: 'content for Favorites' },
     ];
 
-    let [currentTab, setcurrentTab] = useState(tabData[0]);
-    let [currentData, setcurrentData] = useState(tabData);
+    let [currentTab, setCurrentTab] = useState(tabData[0]);
+    let [currentData, setCurrentData] = useState(tabData);
 
     const handleKeyDown = (index) => {
         return (e) => {
@@ -28,10 +28,18 @@ function Tabs({ variant }) {
             const nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
             if(nextFocusEl) {
                 nextFocusEl.focus()
-                setcurrentTab(currentTab = nextFocusTab)
+                setCurrentTab(currentTab = nextFocusTab)
             }
         }
     };
+
+    const handleMenuSelection = (fromIndex) => {
+        const element = currentData[fromIndex];
+        const newData = currentData.slice();
+        newData.splice(fromIndex, 1);
+        newData.splice(3, 0, element);
+        setCurrentData(currentData = newData);
+    }
 
     const tabTitles = currentData.slice(0, 4).map( data => {
         return (
@@ -86,6 +94,7 @@ function Tabs({ variant }) {
                     <DropdownMenu 
                         data={currentData.slice(4)} 
                         label="More"
+                        handleMenuSelection={handleMenuSelection}
                         />
                 </li>
             </ul>
