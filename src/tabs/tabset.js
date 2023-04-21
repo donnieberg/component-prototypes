@@ -33,7 +33,8 @@ function Tabs({ variant }) {
         }
     };
 
-    const handleMenuSelection = (fromIndex) => {
+    const handleMenuSelection = (item) => {
+        const fromIndex = currentData.indexOf(item);
         const element = currentData[fromIndex];
         const newData = currentData.slice();
         newData.splice(fromIndex, 1);

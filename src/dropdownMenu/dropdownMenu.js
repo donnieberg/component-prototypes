@@ -27,7 +27,7 @@ function DropdownMenu({ data, useReactRouter, label, handleMenuSelection }) {
                 setCurrentFocusIndex(currentFocusIndex - 1)
             } else if(e.keyCode == utils.keys.enter) {
                 if(!useReactRouter) {
-                    handleMenuSelection(item.index)
+                    handleMenuSelection(item)
                 }
                 setTimeout(() => {
                     toggleMenu()
