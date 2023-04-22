@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -25,6 +26,10 @@ body {
  */
 .df { display: flex; }
 .df-baseline { align-items: baseline; }
+.df-spaceBetween { justify-content: space-between; }
+.df-end { justify-content: end; }
+
+.width-25 { width: 25%; }
 
 
 /*
@@ -32,3 +37,4 @@ body {
  * Colors & Styles
  */
 .bg-white { background-color: white; }
+.border-l { border-left: 1px solid black; }

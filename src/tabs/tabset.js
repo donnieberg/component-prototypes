@@ -88,6 +88,7 @@ function Tabs({ variant }) {
 
     return (
         <div className="slds-tabs_default" role={ variant == 'landmark' ? 'article' : 'none' }>
+            {variant == 'heading' ? <div>heading</div> : <div>Landmark</div>}
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}

@@ -1,11 +1,17 @@
-import React from "react";
+import { useState } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import { Button } from '@salesforce/design-system-react';
 
 const LayoutPage = () => {
+    let [asideOpen, setAsideOpen] = useState(false);
+
+    const handleSettingsClick = () => {
+        setAsideOpen(asideOpen = !asideOpen);
+    };
+
     return (
         <div>
-            <nav className="bg-white pvm">
+            <nav className="bg-white pvm df">
                 <ul className="df df-baseline">
                     <li className="phm">
                         <Link to="/">Home</Link>
@@ -20,11 +26,12 @@ const LayoutPage = () => {
                     iconName="settings"
                     iconSize="medium"
                     iconVariant="bare"
+                    onClick={handleSettingsClick}
                     variant="icon"
                 />
             </nav>
-            <main className="pam">
-                <Outlet />
+            <main>
+                <Outlet context={[asideOpen, handleSettingsClick]} />
             </main>
         </div>
     );
