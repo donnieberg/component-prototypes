@@ -1,13 +1,8 @@
 import React from "react";
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
-import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
-
+import { Button } from '@salesforce/design-system-react';
 
 const LayoutPage = () => {
-    const tabLinkData = [
-        { index: 0, id: '0_tab', title: 'heading', content: '', link: 'heading' },
-        { index: 1, id: '1_tab', title: 'landmark', content: '', link: 'landmark' },
-    ];
     return (
         <div>
             <nav className="bg-white pvm">
@@ -16,12 +11,17 @@ const LayoutPage = () => {
                         <Link to="/">Home</Link>
                     </li>
                     <li className="phm">
-                        <DropdownMenu 
-                            label="tabset" 
-                            useReactRouter={true} 
-                            data={tabLinkData} />
+                        <Link to="/tabs">Tabs</Link>
                     </li>
                 </ul>
+                <Button
+                    assistiveText={{ icon: 'Page Settings' }}
+                    iconCategory="utility"
+                    iconName="settings"
+                    iconSize="medium"
+                    iconVariant="bare"
+                    variant="icon"
+                />
             </nav>
             <main className="pam">
                 <Outlet />
@@ -31,3 +31,4 @@ const LayoutPage = () => {
 };
 
 export default LayoutPage;
+
