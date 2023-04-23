@@ -19,6 +19,9 @@ const LayoutPage = () => {
                     <li className="phm">
                         <Link to="/tabs">Tabs</Link>
                     </li>
+                    <li className="phm">
+                        <Link to="/errorMessaging">Error Messaging</Link>
+                    </li>
                 </ul>
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
