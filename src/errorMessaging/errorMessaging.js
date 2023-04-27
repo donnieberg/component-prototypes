@@ -26,7 +26,7 @@ const ErrorMessaging = ({ ariaLive }) => {
                         type="text" 
                     />
                 </div>
-                <div className="slds-form-element__help" id="input-error-1">Complete this field</div>
+                <div className="slds-form-element__help" id="input-error-1" role={renderRole()}>Complete this field</div>
             </div>
             <div className="slds-form-element" id="form-input-2">
                 <label className="slds-form-element__label" htmlFor="phone-input-1">
