@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
 
-function Tabs({ variant }) {
+function Tabs({ html, overflowBtn }) {
     const tabData = [
         { index: 0, id: '0_tab', title: 'Accounts', content: 'content for accounts' },
         { index: 1, id: '1_tab', title: 'Approvals', content: 'content for Approvals' },
@@ -81,14 +81,14 @@ function Tabs({ variant }) {
     });
 
     const renderHeading = () => {
-        if(variant == 'heading') {
+        if(html == 'heading') {
             return <h2 className="slds-assistive-text">Tabs</h2>
         }
     };
 
     return (
-        <div className="slds-tabs_default" role={ variant == 'landmark' ? 'article' : 'none' }>
-            {variant == 'heading' ? <div>heading</div> : <div>Landmark</div>}
+        <div className="slds-tabs_default" role={ html == 'landmark' ? 'article' : 'none' }>
+            {html == 'heading' ? <div>heading</div> : <div>Landmark</div>}
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}

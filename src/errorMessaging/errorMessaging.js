@@ -18,7 +18,7 @@ const ErrorMessaging = ({ ariaLive }) => {
                 </label>
                 <div className="slds-form-element__control">
                     <input 
-                        aria-describedby={ariaLive == 'none' ? "input-error-1" : null} 
+                        aria-describedby="input-error-1"
                         className="slds-input" 
                         id="name-input-1" 
                         required={true} 
@@ -34,7 +34,7 @@ const ErrorMessaging = ({ ariaLive }) => {
                 </label>
                 <div className="slds-form-element__control">
                     <input 
-                        aria-describedby={ariaLive == 'none' ? "input-error-1" : null} 
+                        aria-describedby="input-error-1"
                         className="slds-input" 
                         id="phone-input-1" 
                         role={renderRole()}
