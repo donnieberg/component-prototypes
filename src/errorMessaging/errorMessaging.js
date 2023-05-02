@@ -51,7 +51,6 @@ const ErrorMessaging = ({ ariaLive }) => {
                     <input 
                         className="slds-input" 
                         id="phone-input-1" 
-                        role={renderRole()}
                         type="text" 
                     />
                 </div>
