@@ -33,7 +33,7 @@ const ErrorMessaging = ({ ariaLive }) => {
                 </label>
                 <div className="slds-form-element__control">
                     <input 
-                        aria-describedby={describedbyValue()}
+                        aria-describedby={describedbyValue}
                         className="slds-input" 
                         id="name-input-1" 
                         required={true} 
