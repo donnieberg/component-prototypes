@@ -1,28 +1,32 @@
 const ErrorMessaging = ({ ariaLive }) => {
     const renderRole = () => {
-        if(ariaLive == 'none') {
+        if(ariaLive === 'none') {
             return;
-        } else if (ariaLive == 'status') {
+        } else if (ariaLive === 'status') {
             return 'status';
         } else {
             return 'alert';
         }
     };
-    let describedbyId = "";
+    let describedbyId = '';
     const describedbyValue = () => {
         return describedbyId;
     };  // End describedbyValue function
     const handleErrorOnBlur = (e) => {
         let formInput1 = document.getElementById("form-input-1");
-        let nameInput = document.getElementById("name-input-1");
         let nameError = document.getElementById("input-error-1");
         if(e.target.value.length < 1) {
             formInput1.classList.add("slds-has-error");
             e.target.setAttribute("aria-invalid", true);
-            describedbyId = "input-error-1";
-            nameError.style.display = "block";
+            describedbyId = 'input-error-1';
+            //nameError.style.display = "block";
         }  // End if the input is empty
     };  // End handleOnBlur event handler
+    const renderErrorText = () => {
+        return (
+            <div className="slds-form-element__help">Complete this field</div>
+        )  // End return JSX
+    };  // End renderErrorText function
 
     return (
         <div className="pam">
@@ -33,7 +37,7 @@ const ErrorMessaging = ({ ariaLive }) => {
                 </label>
                 <div className="slds-form-element__control">
                     <input 
-                        aria-describedby={describedbyValue}
+                        aria-describedby="input-error-1" 
                         className="slds-input" 
                         id="name-input-1" 
                         required={true} 
@@ -41,7 +45,7 @@ const ErrorMessaging = ({ ariaLive }) => {
                         onBlur={handleErrorOnBlur}
                     />
                 </div>
-                <div className="slds-form-element__help" id="input-error-1" role={renderRole()} style={{display: "none"}}>Complete this field</div>
+                <div id="input-error-1" html-role={renderRole()}>{renderErrorText()}</div>
             </div>
             <div className="slds-form-element" id="form-input-2">
                 <label className="slds-form-element__label" htmlFor="phone-input-1">
