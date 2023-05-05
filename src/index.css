@@ -8,6 +8,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+dialog {
+    border: none;
+    background-color: transparent;
+    width: 50%;
+    max-width: 40rem; 
+    min-width: 20rem;
+}
+
+dialog::backdrop {
+    background: var(--slds-c-backdrop-color-background, var(--sds-c-backdrop-color-background, var(--slds-g-color-neutral-10-opacity-50, var(--lwc-colorBackgroundTempModalTint,rgba(8, 7, 7, 0.6)))));
+}
+
 /*
  * ===========================================================
  * Spacing
@@ -38,3 +50,5 @@ body {
  */
 .bg-white { background-color: white; }
 .border-l { border-left: 1px solid black; }
+
+

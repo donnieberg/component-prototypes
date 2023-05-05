@@ -22,6 +22,9 @@ const LayoutPage = () => {
                     <li className="phm">
                         <Link to="/errorMessaging">Error Messaging</Link>
                     </li>
+                    <li className="phm">
+                        <Link to="/modal">Modal</Link>
+                    </li>
                 </ul>
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
