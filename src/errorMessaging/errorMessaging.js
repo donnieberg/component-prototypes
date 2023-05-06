@@ -1,4 +1,4 @@
-const ErrorMessaging = ({ ariaLive }) => {
+const ErrorMessaging = ({ ariaLive }, { hasError }, { setHasError } ) => {
     const renderRole = () => {
         if(ariaLive === 'none') {
             return;
@@ -8,24 +8,21 @@ const ErrorMessaging = ({ ariaLive }) => {
             return 'alert';
         }
     };
-    let describedbyId = '';
-    const describedbyValue = () => {
-        return describedbyId;
-    };  // End describedbyValue function
     const handleErrorOnBlur = (e) => {
         let formInput1 = document.getElementById("form-input-1");
-        let nameError = document.getElementById("input-error-1");
         if(e.target.value.length < 1) {
             formInput1.classList.add("slds-has-error");
             e.target.setAttribute("aria-invalid", true);
-            describedbyId = 'input-error-1';
-            //nameError.style.display = "block";
+            setHasError(true);
         }  // End if the input is empty
     };  // End handleOnBlur event handler
     const renderErrorText = () => {
-        return (
-            <div className="slds-form-element__help">Complete this field</div>
-        )  // End return JSX
+        if(hasError) {
+            return (
+                <div className="slds-form-element__help">Complete this field</div>
+            )  // End return JSX
+        }  // End if hasError
+        else return;
     };  // End renderErrorText function
 
     return (
