@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import { Button } from '@salesforce/design-system-react';
 

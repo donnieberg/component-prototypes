@@ -4,8 +4,10 @@ import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import utils from '../utils.js';
 import { Button, Input } from '@salesforce/design-system-react';
 
-function Modal() {
+function Modal({ initialFocus }) {
     const modalRef = useRef(null);
+    const headingRef = useRef(null);
+    const formFieldRef = useRef(null);
 
     const handleBtnClick = () => {
         const modal = modalRef.current;
@@ -13,6 +15,8 @@ function Modal() {
             modal.close();
         } else {
             modal.showModal();
+            if(initialFocus == 'heading') headingRef.current.focus();
+            if(initialFocus == 'formField') formFieldRef.current.focus();
         }
     };
 
@@ -33,10 +37,10 @@ function Modal() {
                     />
                 </div>
                     <div className="slds-modal__header">
-                        <h1>Add New Contact</h1>
+                        <h1 tabIndex="-1" ref={headingRef}>Add New Contact</h1>
                     </div>
                     <div className="pam slds-modal__content">
-                        <Input id="firstName" label="First Name" placeholder="Enter in text" />
+                        <Input inputRef={formFieldRef} id="firstName" label="First Name" placeholder="Enter in text" />
                         <Input id="lastName" label="Last Name" placeholder="Enter in text" />
                         <Input id="email" label="Email" placeholder="Enter in text" type="email" />
                         <Input id="phone" label="Email" placeholder="Enter in text" type="tel" />

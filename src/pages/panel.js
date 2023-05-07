@@ -1,9 +1,24 @@
 import { useOutletContext } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-system-react';
+import utils from '../utils.js'
 
 const Panel = ({ settings }) => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
+    const panelRef = useRef(null);
+
+    useEffect(() => {
+        const handleEsc = (event) => {
+            if (event.keyCode === 27) {
+                handleSettingsClick()
+            }
+        };
+        window.addEventListener('keydown', handleEsc);
+
+        return () => {
+            window.removeEventListener('keydown', handleEsc);
+        };
+    }, []);
 
     const handleOnChange = (setting) => {
         return (e) => {
@@ -12,7 +27,7 @@ const Panel = ({ settings }) => {
     };
 
     return (
-        <aside className="pam border-l width-25">
+        <aside ref={panelRef} className="pam border-l width-25">
             <div className="df df-end">
                 <Button
                     assistiveText={{ icon: 'Close' }}
