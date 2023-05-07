@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import './slds/styles/salesforce-lightning-design-system.min.css';
 import TabsPage from './pages/tabset.js';
 import ErrorMessaging from './pages/errorMessaging.js';
@@ -9,7 +9,7 @@ import HomePage from "./pages/home.js";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LayoutPage />}>
           <Route index element={<HomePage />} />
@@ -18,7 +18,7 @@ function App() {
           <Route path="modal" element={<ModalPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
