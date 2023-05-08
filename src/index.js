@@ -8,7 +8,7 @@ import { IconSettings } from '@salesforce/design-system-react';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <IconSettings iconPath="/icons">
+      <IconSettings iconPath={`${process.env.PUBLIC_URL}/icons`}>
           <App />
       </IconSettings>
   </React.StrictMode>
