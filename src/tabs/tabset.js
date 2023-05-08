@@ -11,6 +11,7 @@ function Tabs({ html, overflowBtn }) {
     const tab4_ref = useRef(null);
     const tab5_ref = useRef(null);
     const tab6_ref = useRef(null);
+    const overflowBtnRef = useRef(null);
 
     const tabData = [
         { index: 0, id: '0_tab', ref: tab0_ref, title: 'Accounts', content: 'content for accounts' },
@@ -28,19 +29,33 @@ function Tabs({ html, overflowBtn }) {
     const handleKeyDown = (index) => {
         return (e) => {
             let nextFocusTab;
-            console.log(index)
+            let nextFocusEl;
+            if(e.keyCode == utils.keys.right) {
+                if(index < 3) {
+                    nextFocusTab = currentData[index + 1];
+                    const nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
+                    if(nextFocusEl) {
+                        nextFocusEl.focus()
+                        setCurrentTab(currentTab = nextFocusTab)
+                    }
+                } else {
+                    overflowBtnRef.current.focus()
+                }
+            } else if (e.keyCode == utils.keys.left) {
+                nextFocusTab = currentData[index - 1];
+            }
+            /*
             if(e.keyCode == utils.keys.right) {
                 nextFocusTab = currentData[index + 1];
             } else if (e.keyCode == utils.keys.left) {
                 nextFocusTab = currentData[index - 1];
             }
             const nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
-            console.log(currentData)
-            console.log(nextFocusTab)
             if(nextFocusEl) {
                 nextFocusEl.focus()
                 setCurrentTab(currentTab = nextFocusTab)
             }
+            */
         }
     };
 
@@ -111,7 +126,7 @@ function Tabs({ html, overflowBtn }) {
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
-                <li className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
+                <li ref={overflowBtnRef} tabIndex="-1" className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
                     <DropdownMenu 
                         data={currentData.slice(4)} 
                         label="More"
