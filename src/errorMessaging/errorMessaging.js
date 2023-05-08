@@ -1,4 +1,5 @@
-const ErrorMessaging = ({ ariaLive }, { hasError }, { setHasError } ) => {
+import { useState } from 'react';
+const ErrorMessaging = ({ ariaLive, hasError, setHasError } ) => {
     const renderRole = () => {
         if(ariaLive === 'none') {
             return;
@@ -42,7 +43,7 @@ const ErrorMessaging = ({ ariaLive }, { hasError }, { setHasError } ) => {
                         onBlur={handleErrorOnBlur}
                     />
                 </div>
-                <div id="input-error-1" html-role={renderRole()}>{renderErrorText()}</div>
+                <div id="input-error-1" role={renderRole()}>{renderErrorText()}</div>
             </div>
             <div className="slds-form-element" id="form-input-2">
                 <label className="slds-form-element__label" htmlFor="phone-input-1">

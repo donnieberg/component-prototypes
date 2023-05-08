@@ -16,7 +16,7 @@ const ErrorMessagingPage = () => {
     return (
         <div className="df df-spaceBetween">
             <section>
-                <ErrorMessaging ariaLive={ariaLive} hasError={hasError}setHasError={setHasError} />
+                <ErrorMessaging ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} />
             </section>
             {panelOpen ? <Panel settings={settings} optionValue={ariaLive} setOptionValue={setAriaLive} /> : null }
         </div>
