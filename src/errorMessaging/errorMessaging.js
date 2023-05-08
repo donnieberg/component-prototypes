@@ -1,13 +1,30 @@
-const ErrorMessaging = ({ ariaLive }) => {
+import { useState } from 'react';
+const ErrorMessaging = ({ ariaLive, hasError, setHasError } ) => {
     const renderRole = () => {
-        if(ariaLive == 'none') {
+        if(ariaLive === 'none') {
             return;
-        } else if (ariaLive == 'status') {
+        } else if (ariaLive === 'status') {
             return 'status';
         } else {
             return 'alert';
         }
     };
+    const handleErrorOnBlur = (e) => {
+        let formInput1 = document.getElementById("form-input-1");
+        if(e.target.value.length < 1) {
+            formInput1.classList.add("slds-has-error");
+            e.target.setAttribute("aria-invalid", true);
+            setHasError(true);
+        }  // End if the input is empty
+    };  // End handleOnBlur event handler
+    const renderErrorText = () => {
+        if(hasError) {
+            return (
+                <div className="slds-form-element__help">Complete this field</div>
+            )  // End return JSX
+        }  // End if hasError
+        else return;
+    };  // End renderErrorText function
 
     return (
         <div className="pam">
@@ -18,15 +35,15 @@ const ErrorMessaging = ({ ariaLive }) => {
                 </label>
                 <div className="slds-form-element__control">
                     <input 
-                        aria-describedby="input-error-1"
+                        aria-describedby="input-error-1" 
                         className="slds-input" 
                         id="name-input-1" 
                         required={true} 
-                        role={renderRole()}
                         type="text" 
+                        onBlur={handleErrorOnBlur}
                     />
                 </div>
-                <div className="slds-form-element__help" id="input-error-1">Complete this field</div>
+                <div id="input-error-1" role={renderRole()}>{renderErrorText()}</div>
             </div>
             <div className="slds-form-element" id="form-input-2">
                 <label className="slds-form-element__label" htmlFor="phone-input-1">
@@ -34,10 +51,8 @@ const ErrorMessaging = ({ ariaLive }) => {
                 </label>
                 <div className="slds-form-element__control">
                     <input 
-                        aria-describedby="input-error-1"
                         className="slds-input" 
                         id="phone-input-1" 
-                        role={renderRole()}
                         type="text" 
                     />
                 </div>

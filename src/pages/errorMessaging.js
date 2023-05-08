@@ -7,6 +7,7 @@ import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-sy
 const ErrorMessagingPage = () => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
     let [ariaLive, setAriaLive] = useState('none');
+    let [hasError, setHasError] = useState(false);
 
     const settings = [
         { id: 'inputError', labels: { label: 'Markup for Input Errors'}, options: ['none', 'status', 'alert'], }
@@ -15,7 +16,7 @@ const ErrorMessagingPage = () => {
     return (
         <div className="df df-spaceBetween">
             <section>
-                <ErrorMessaging ariaLive={ariaLive} />
+                <ErrorMessaging ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} />
             </section>
             {panelOpen ? <Panel settings={settings} optionValue={ariaLive} setOptionValue={setAriaLive} /> : null }
         </div>
