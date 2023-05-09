@@ -7,7 +7,6 @@ import MultipleErrorsPage from './pages/multipleErrorsPage.js';
 import ModalPage from './pages/modalPage.js';
 import LayoutPage from "./pages/layout.js";
 import HomePage from "./pages/home.js";
-import MultipleErrors from './multipleErrors/multipleErrors';
 
 function App() {
   return (
