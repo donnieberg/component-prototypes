@@ -1,3 +1,7 @@
+.sf-logo {
+    height: 50px;
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -24,12 +28,14 @@ dialog::backdrop {
  * ===========================================================
  * Spacing
  */
+.pas { padding: .5rem; }
 .pam { padding: 1rem; }
 .phm { padding-left: 1rem; padding-right: 1rem; }
 .pvm { padding-top: 1rem; padding-bottom: 1rem; }
 .mam { margin: 1rem; }
 .mhm { margin-left: 1rem; margin-right: 1rem; }
 .mvm { margin-top: 1rem; margin-bottom: 1rem; }
+.mr-auto { margin-right: auto; }
 
 
 /*
@@ -40,8 +46,12 @@ dialog::backdrop {
 .df-baseline { align-items: baseline; }
 .df-spaceBetween { justify-content: space-between; }
 .df-end { justify-content: end; }
+.df-center { justify-content: center; }
+
+.dib { display: inline-block; }
 
 .width-25 { width: 25%; }
+.width-75 { width: 75%; }
 
 
 /*
