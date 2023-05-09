@@ -6,19 +6,18 @@ import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-sy
 
 const MultipleErrorsPage = () => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
-    let [ariaLive, setAriaLive] = useState('none');
-    let [hasError, setHasError] = useState(false);
+    let [errorStyle, setErrorStyle] = useState('Link');
 
     const settings = [
-        { id: 'inputError', labels: { label: 'Markup for Input Errors'}, options: ['none', 'status', 'alert'], }
+        { id: 'multipleErrors', labels: { label: 'Select an error type'}, options: ['Link', 'Focus first'], currentOption: errorStyle, setOptionHandler: setErrorStyle}
     ];
 
     return (
         <div className="df df-spaceBetween">
             <section>
-                <ErrorMessaging ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} />
+                <MultipleErrors settings={settings} />
             </section>
-            {panelOpen ? <Panel settings={settings} optionValue={ariaLive} setOptionValue={setAriaLive} /> : null }
+            {panelOpen ? <Panel settings={settings}  /> : null }
         </div>
     );
 };
