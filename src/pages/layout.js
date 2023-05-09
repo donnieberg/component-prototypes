@@ -20,6 +20,9 @@ const LayoutPage = () => {
                         <Link to="/tabs">Tabs</Link>
                     </li>
                     <li className="phm">
+                        <Link to="/multipleErrors">Inputs with multiple errors</Link>
+                    </li>
+                    <li className="phm">
                         <Link to="/errorMessaging">Error Messaging</Link>
                     </li>
                     <li className="phm">

@@ -1,44 +1,50 @@
-import { useState, useRef } from ‘react’;
+import { useOutletContext } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+
 const MultipleErrors = ({errorStyle}) => {
-  const fnameRef = useRef(null);
-  const [state, setState] = useState(new Map());
-  setState(new Map(state.set('fname', {
-    inputName: 'fname',
+  const [state, setState] = useState([
+    {inputName: 'fname',
+    inputId: 'input-name-1',
     label: 'First name',
+    isRequired: false,
     inputRef: useRef(null),
+    hasError: false,
     inputValue: ''
-  })));
-  setState(new Map(state.set('lname', {
-    inputName: 'lname',
+  },
+  {inputName: 'lname',
+    inputId: 'input-name-2',
+    isRequired: true,
     label: 'Last name',
     inputRef: useRef(null),
+    hasError: false,
     inputValue: ''
-  })));
-  setState(new Map(state.set('email', {
-    inputName: 'email',
+  },
+  {inputName: 'email',
+    inputId: 'input-name-3',
+    isRequired: false,
     label: 'Email address',
     inputRef: useRef(null),
+    hasError: false,
     inputValue: ''
-  })));
-  setState(new Map(state.set('phone', {
-    inputName: 'phone',
+  },
+  {inputName: 'phone',
+    inputId: 'input-name-4',
+    isRequired: false,
     label: 'Phone',
     inputRef: useRef(null),
+    hasError: false,
     inputValue: ''
-  })));
-  setState(new Map(state.set('company', {
-    inputName: 'company',
+  },
+  {inputName: 'company',
+    inputId: 'input-name-5',
+    isRequired: true,
     label: 'Company name',
     inputRef: useRef(null),
+    hasError: false,
     inputValue: ''
-  })));  // End setup of useState
+  }]);  // End setup of useState
 
   const handleChange = (e) => {
-    /*
-    setState({
-      [e.target.name]: e.target.value
-    }
-    */
     let currentInputValue = state.get(e.target.name);
     currentInputValue.inputValue = e.target.value;
     setState(new Map(state.set(e.target.name, currentInputValue)));
@@ -47,29 +53,31 @@ const MultipleErrors = ({errorStyle}) => {
   return (
     <form onSubmit={handleSubmit}>
       {
-      [state.values()].map(element => {      
-        (
+      state.map(element => {      
+        return (
         <div className="slds-form-element" id="form-input-1">
-          <label className="slds-form-element__label" htmlFor="name-input-1">
-            <abbr className="slds-required" title="required">*</abbr>
+          <label className="slds-form-element__label" htmlFor={element.inputId}>
+            {element.isRequired ? <abbr className="slds-required" title="required">*</abbr> : null}
             {element.label}
           </label>
           <div className="slds-form-element__control">
             <input 
               className="slds-input" 
-              id="name-input-1" 
-              required={true} 
+              id={element.inputId} 
+              required={element.isRequired} 
               type="text" 
-              ref={inputRef}
+              ref={element.inputRef}
               name={element.inputName}
             />
           </div>
-          <div className="slds-form-element__help" id="input-error-1" role={renderRole()} style={{display: "none"}}>Complete this field</div>
         </div>
-      )})};  // End forEach 
+      )})}
     </form>
   )
   };  // End renderForm function
+  const handleSubmit = () => {
+    //
+  };  // End handleSubmit function
 
   return (
     <div className="pam">
