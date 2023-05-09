@@ -46,7 +46,9 @@ const MultipleErrors = ({errorStyle}) => {
   const renderForm = () => {
   return (
     <form onSubmit={handleSubmit}>
-      state.values().forEach(element => {      
+      {
+      [state.values()].map(element => {      
+        (
         <div className="slds-form-element" id="form-input-1">
           <label className="slds-form-element__label" htmlFor="name-input-1">
             <abbr className="slds-required" title="required">*</abbr>
@@ -54,7 +56,6 @@ const MultipleErrors = ({errorStyle}) => {
           </label>
           <div className="slds-form-element__control">
             <input 
-              aria-describedby={describedbyValue()}
               className="slds-input" 
               id="name-input-1" 
               required={true} 
@@ -65,7 +66,7 @@ const MultipleErrors = ({errorStyle}) => {
           </div>
           <div className="slds-form-element__help" id="input-error-1" role={renderRole()} style={{display: "none"}}>Complete this field</div>
         </div>
-      });  // End forEach 
+      )})};  // End forEach 
     </form>
   )
   };  // End renderForm function
@@ -73,6 +74,7 @@ const MultipleErrors = ({errorStyle}) => {
   return (
     <div className="pam">
       <h2>Multiple Errors</h2>
+      {renderForm()}
     </div>
   );
 }; // End multipleErrors component
