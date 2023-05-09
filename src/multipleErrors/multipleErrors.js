@@ -1,6 +1,8 @@
-import { useState, useRef } from ‘react’;
+import { useOutletContext } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+
 const MultipleErrors = ({errorStyle}) => {
-  const fnameRef = useRef(null);
+  //const fnameRef = useRef(null);
   const [state, setState] = useState(new Map());
   setState(new Map(state.set('fname', {
     inputName: 'fname',
@@ -34,11 +36,6 @@ const MultipleErrors = ({errorStyle}) => {
   })));  // End setup of useState
 
   const handleChange = (e) => {
-    /*
-    setState({
-      [e.target.name]: e.target.value
-    }
-    */
     let currentInputValue = state.get(e.target.name);
     currentInputValue.inputValue = e.target.value;
     setState(new Map(state.set(e.target.name, currentInputValue)));
@@ -60,16 +57,18 @@ const MultipleErrors = ({errorStyle}) => {
               id="name-input-1" 
               required={true} 
               type="text" 
-              ref={inputRef}
+              ref={element.inputRef}
               name={element.inputName}
             />
           </div>
-          <div className="slds-form-element__help" id="input-error-1" role={renderRole()} style={{display: "none"}}>Complete this field</div>
         </div>
       )})};  // End forEach 
     </form>
   )
   };  // End renderForm function
+  const handleSubmit = () => {
+    //
+  };  // End handleSubmit function
 
   return (
     <div className="pam">

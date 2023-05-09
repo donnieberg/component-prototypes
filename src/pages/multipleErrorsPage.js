@@ -16,9 +16,9 @@ const MultipleErrorsPage = () => {
     return (
         <div className="df df-spaceBetween">
             <section>
-                <ErrorMessaging ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} />
+                <MultipleErrors settings={settings} />
             </section>
-            {panelOpen ? <Panel settings={settings} optionValue={ariaLive} setOptionValue={setAriaLive} /> : null }
+            {panelOpen ? <Panel settings={settings}  /> : null }
         </div>
     );
 };
