@@ -10,7 +10,7 @@ const ErrorMessagingPage = () => {
     let [hasError, setHasError] = useState(false);
 
     const settings = [
-        { id: 'inputError', labels: { label: 'Markup for Input Errors'}, options: ['none', 'status', 'alert'], }
+        { id: 'inputError', labels: { label: 'Markup for Input Errors'}, options: ['none', 'status', 'alert'], currentOption: ariaLive, setOptionHandler: setAriaLive}
     ];
 
     return (
