@@ -6,7 +6,8 @@ const utils = {
         down: 40,
         esc: 27,
         enter: 13
-    }
+    },
+
 };
 
 export default utils;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import { Button } from '@salesforce/design-system-react';
 
@@ -21,6 +21,9 @@ const LayoutPage = () => {
                     </li>
                     <li className="phm">
                         <Link to="/errorMessaging">Error Messaging</Link>
+                    </li>
+                    <li className="phm">
+                        <Link to="/modal">Modal</Link>
                     </li>
                 </ul>
                 <Button

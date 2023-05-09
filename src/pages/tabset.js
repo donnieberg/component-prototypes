@@ -7,19 +7,19 @@ import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-sy
 const TabsPage = () => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
     let [markup, setMarkup] = useState('heading');
+    let [keyboard, setKeyboard] = useState('tab');
 
     const settings = [
-        { id: 'tabMarkup', labels: { label: 'Markup for Tabset HTML'}, options: ['heading', 'landmark'], }
+        { id: 'tabMarkup', labels: { label: 'Markup for Tabset HTML'}, options: ['heading', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
+        { id: 'overflowBtn', labels: { label: 'Overflow Button keyboard'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard }
     ];
 
     return (
         <div className="df df-spaceBetween">
             <section>
-                {markup == 'heading' 
-                    ? <Tabset variant="heading" />
-                    : <Tabset variant="landmark" />}
+                <Tabset html={markup} overflowBtn={keyboard} />
             </section>
-            {panelOpen ? <Panel settings={settings} optionValue={markup} setOptionValue={setMarkup} /> : null }
+            {panelOpen ? <Panel settings={settings} /> : null }
         </div>
     );
 };
