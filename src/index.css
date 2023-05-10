@@ -1,5 +1,26 @@
+/*
+ * ===========================================================
+ * Custom styles
+ */
+
 .sf-logo {
     height: 50px;
+}
+.global-search {
+    width: 400px;
+}
+
+.user-container {
+    height: 150px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: -100px;
+    background-color: white;
+    border: 5px solid #e5e5e5;
 }
 
 body {
@@ -40,7 +61,7 @@ dialog::backdrop {
 
 /*
  * ===========================================================
- * Display
+ * Display & Width
  */
 .df { display: flex; }
 .df-baseline { align-items: baseline; }
@@ -52,6 +73,7 @@ dialog::backdrop {
 
 .width-25 { width: 25%; }
 .width-75 { width: 75%; }
+.width-100 { width: 100%; }
 
 
 /*
@@ -60,5 +82,11 @@ dialog::backdrop {
  */
 .bg-white { background-color: white; }
 .border-l { border-left: 1px solid black; }
+
+.border-rounded { border-radius: .5rem; }
+.circle { border-radius: 50%; }
+
+.bold { font-weight: bold; }
+
 
 
