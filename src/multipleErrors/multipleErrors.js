@@ -55,7 +55,7 @@ const MultipleErrors = ({errorStyle}) => {
       {
       state.map(element => {      
         return (
-        <div className="slds-form-element" id="form-input-1">
+        <div key={element.inputId} className="slds-form-element" id="form-input-1">
           <label className="slds-form-element__label" htmlFor={element.inputId}>
             {element.isRequired ? <abbr className="slds-required" title="required">*</abbr> : null}
             {element.label}
