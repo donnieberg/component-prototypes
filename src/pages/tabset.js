@@ -1,8 +1,8 @@
 import Tabset from '../tabs/tabset.js'
 import Panel from './panel.js'
+import GusHeader from './templates/header.js'
 import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
-import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-system-react';
 
 const TabsPage = () => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
@@ -16,9 +16,12 @@ const TabsPage = () => {
 
     return (
         <div className="df df-spaceBetween">
-            <section>
-                <Tabset html={markup} overflowBtn={keyboard} />
-            </section>
+            <div className="width-100">
+                <GusHeader />
+                <section>
+                    <Tabset html={markup} overflowBtn={keyboard} />
+                </section>
+            </div>
             {panelOpen ? <Panel settings={settings} /> : null }
         </div>
     );

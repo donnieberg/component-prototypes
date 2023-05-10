@@ -1,3 +1,28 @@
+/*
+ * ===========================================================
+ * Custom styles
+ */
+
+.sf-logo {
+    height: 50px;
+}
+.global-search {
+    width: 400px;
+}
+
+.user-container {
+    height: 150px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: -100px;
+    background-color: white;
+    border: 5px solid #e5e5e5;
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -24,24 +49,31 @@ dialog::backdrop {
  * ===========================================================
  * Spacing
  */
+.pas { padding: .5rem; }
 .pam { padding: 1rem; }
 .phm { padding-left: 1rem; padding-right: 1rem; }
 .pvm { padding-top: 1rem; padding-bottom: 1rem; }
 .mam { margin: 1rem; }
 .mhm { margin-left: 1rem; margin-right: 1rem; }
 .mvm { margin-top: 1rem; margin-bottom: 1rem; }
+.mr-auto { margin-right: auto; }
 
 
 /*
  * ===========================================================
- * Display
+ * Display & Width
  */
 .df { display: flex; }
 .df-baseline { align-items: baseline; }
 .df-spaceBetween { justify-content: space-between; }
 .df-end { justify-content: end; }
+.df-center { justify-content: center; }
+
+.dib { display: inline-block; }
 
 .width-25 { width: 25%; }
+.width-75 { width: 75%; }
+.width-100 { width: 100%; }
 
 
 /*
@@ -50,5 +82,11 @@ dialog::backdrop {
  */
 .bg-white { background-color: white; }
 .border-l { border-left: 1px solid black; }
+
+.border-rounded { border-radius: .5rem; }
+.circle { border-radius: 50%; }
+
+.bold { font-weight: bold; }
+
 
 
