@@ -53,9 +53,12 @@ dialog::backdrop {
 .pam { padding: 1rem; }
 .phm { padding-left: 1rem; padding-right: 1rem; }
 .pvm { padding-top: 1rem; padding-bottom: 1rem; }
+.pvs { padding-top: .5rem; padding-bottom: .5rem; }
+
 .mam { margin: 1rem; }
 .mhm { margin-left: 1rem; margin-right: 1rem; }
 .mvm { margin-top: 1rem; margin-bottom: 1rem; }
+.mrxs { margin-right: .25rem; }
 .mr-auto { margin-right: auto; }
 
 

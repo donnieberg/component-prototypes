@@ -11,7 +11,7 @@ const GusHeader = () => {
     return (
         <div>
             <header className="phm bg-white df df-center">
-                <a href="javascript:void(0)" className="mr-auto">
+                <a href="#" className="mr-auto">
                     <img src="https://gus.lightning.force.com/img/salesforce-noname-logo-v2.svg" alt="salesforce logo" className="sf-logo" />
                 </a>
                 <Input
@@ -25,7 +25,7 @@ const GusHeader = () => {
                         />
                     }
                     id="global-search"
-                    assistiveText="Search"
+                    assistiveText={{label:"Search"}}
                     className="mr-auto global-search"
                     placeholder="Search..."
                 />
@@ -43,8 +43,8 @@ const GusHeader = () => {
                 <ul className="dib">
                     {navItems.map(item => {
                         return (
-                            <li className="phm dib">
-                                <a href="javascript:void(0)">
+                            <li key={item.label} className="phm dib">
+                                <a href="#">
                                     {item.label}
                                 </a>
                             </li>

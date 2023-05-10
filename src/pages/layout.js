@@ -11,24 +11,7 @@ const LayoutPage = () => {
 
     return (
         <div>
-            <nav className="bg-white pvm df">
-                <ul className="df df-baseline">
-                    <li className="phm">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="phm">
-                        <Link to="/tabs">Tabs</Link>
-                    </li>
-                    <li className="phm">
-                        <Link to="/multipleErrors">Inputs with multiple errors</Link>
-                    </li>
-                    <li className="phm">
-                        <Link to="/errorMessaging">Error Messaging</Link>
-                    </li>
-                    <li className="phm">
-                        <Link to="/modal">Modal</Link>
-                    </li>
-                </ul>
+            <nav className="bg-white pvs df df-end">
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
                     iconCategory="utility"

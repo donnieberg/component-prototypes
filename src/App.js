@@ -9,19 +9,19 @@ import LayoutPage from "./pages/layout.js";
 import HomePage from "./pages/home.js";
 
 function App() {
-  return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<LayoutPage />}>
-          <Route index element={<HomePage />} />
-          <Route path="tabs" element={<TabsPage />} />
-          <Route path="errorMessaging" element={<ErrorMessaging />} />
-          <Route path="multipleErrors" element={<MultipleErrorsPage />} />
-          <Route path="modal" element={<ModalPage />} />
-        </Route>
-      </Routes>
-    </HashRouter>
-  );
+    return (
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<LayoutPage />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="tabs" element={<TabsPage />} />
+                    <Route path="errorMessaging" element={<ErrorMessaging />} />
+                    <Route path="multipleErrors" element={<MultipleErrorsPage />} />
+                    <Route path="modal" element={<ModalPage />} />
+                </Route>
+            </Routes>
+        </HashRouter>
+    );
 }
 
 export default App;
