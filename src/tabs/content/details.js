@@ -1,3 +1,4 @@
+import { Input } from '@salesforce/design-system-react';
 const Details = () => {
     const data = [
         { id: 'details-1', label: 'Company Name', value: 'Test Company', },
@@ -11,10 +12,12 @@ const Details = () => {
         return data.map(item  => {
             return (
                 <div key={item.id} className="slds-form-element detail-item">
-                    <label className="slds-form-element__label" for={item.id}>{item.label}</label>
-                    <div className="slds-form-element__control">
-                        <input type="text" id={item.id} readonly="" placeholder="" className="slds-input" value={item.value} />
-                    </div>
+                    <Input
+                        id={item.id}
+                        label={item.label}
+                        readOnly
+                        value={item.value}
+                    />
                 </div>
             )
         });

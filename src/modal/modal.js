@@ -51,8 +51,20 @@ function Modal({ initialFocus }) {
                         <Input inputRef={formFieldRef} id="firstName" label="First Name" placeholder="Enter in text" />
                         <Input id="lastName" label="Last Name" placeholder="Enter in text" />
                         <Input id="email" label="Email" placeholder="Enter in text" type="email" />
-                        <Input id="phone" label="Email" placeholder="Enter in text" type="tel" />
+                        <Input id="phone" label="Phone" placeholder="Enter in text" type="tel" />
                     </div>
+                <div className="slds-modal__footer">
+                    <Button 
+                        label="Cancel"
+                        onClick={handleBtnClick}
+                        variant="neutral"
+                    />
+                    <Button 
+                        label="Save"
+                        onClick={handleBtnClick}
+                        variant="brand"
+                    />
+                </div>
             </dialog>
         </div>
     )
