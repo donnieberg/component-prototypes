@@ -15,7 +15,7 @@ const MultipleErrorsPage = () => {
     return (
         <div className="df df-spaceBetween">
             <section>
-                <MultipleErrors settings={settings} />
+                <MultipleErrors errorStyle={errorStyle} />
             </section>
             {panelOpen ? <Panel settings={settings}  /> : null }
         </div>
