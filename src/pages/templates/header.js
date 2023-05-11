@@ -1,6 +1,7 @@
 import { Button, Input, InputIcon } from '@salesforce/design-system-react';
+import Modal from '../../modal/modal.js'
 
-const GusHeader = () => {
+const GusHeader = ({ showModal, initialFocus, headerData }) => {
     const navItems = [
         { label: 'Home', },
         { label: 'Chatter', },
@@ -53,13 +54,14 @@ const GusHeader = () => {
                 </ul>
             </nav>
             <div className="slds-brand-band slds-template_profile slds-brand-band_user">
-                <div className="df bg-white mam pam border-rounded user-container">
-                    <img src={`${process.env.PUBLIC_URL}/avatar.png`} alt="" className="avatar circle" />
+                <div className="df bg-white mhl pam border-rounded user-container">
+                    <img src={headerData.imageUrl} alt="" className="avatar circle" />
                     <div>
-                        <h1 className="mhm slds-text-heading_large bold">Darnell Johnson</h1>
-                        <p className="mhm dib">Account Executive</p>
-                        <p className="dib">d.johnson@test.com</p>
+                        <h1 className="mhm slds-text-heading_large bold">{headerData.label}</h1>
+                        <p className="mhm dib">{headerData.subtitle1}</p>
+                        <p className="dib">{headerData.subtitle2}</p>
                     </div>
+                    {showModal ? <Modal initialFocus={initialFocus} /> : null}
                 </div>
             </div>
         </div>

@@ -21,8 +21,16 @@ function Modal({ initialFocus }) {
     };
 
     return (
-        <div>
-            <Button label="New Contact" id="toggleModal" onClick={handleBtnClick} variant="neutral" />
+        <div className="ml-auto">
+            <Button 
+                label="New User" 
+                id="toggleModal" 
+                onClick={handleBtnClick} 
+                variant="neutral" 
+                iconCategory="utility"
+                iconName="add"
+                iconPosition="left"
+            />
             <dialog id="dialog" ref={modalRef}>
                 <div className="df df-end">
                     <Button 
@@ -37,7 +45,7 @@ function Modal({ initialFocus }) {
                     />
                 </div>
                     <div className="slds-modal__header">
-                        <h1 tabIndex="-1" ref={headingRef}>Add New Contact</h1>
+                        <h1 tabIndex="-1" ref={headingRef}>Add New User</h1>
                     </div>
                     <div className="pam slds-modal__content">
                         <Input inputRef={formFieldRef} id="firstName" label="First Name" placeholder="Enter in text" />

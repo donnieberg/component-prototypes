@@ -23,6 +23,14 @@
     border: 5px solid #e5e5e5;
 }
 
+.slds-template_profile {
+    padding: 8rem 0rem .75rem !important;
+}
+
+.detail-item {
+    border-bottom: var(--lwc-borderWidthThin,1px) solid var(--slds-g-color-border-base-1, var(--lwc-colorBorder,rgb(229, 229, 229)));
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -52,14 +60,17 @@ dialog::backdrop {
 .pas { padding: .5rem; }
 .pam { padding: 1rem; }
 .phm { padding-left: 1rem; padding-right: 1rem; }
+
 .pvm { padding-top: 1rem; padding-bottom: 1rem; }
 .pvs { padding-top: .5rem; padding-bottom: .5rem; }
 
 .mam { margin: 1rem; }
 .mhm { margin-left: 1rem; margin-right: 1rem; }
+.mhl { margin-left: 2rem; margin-right: 2rem; }
 .mvm { margin-top: 1rem; margin-bottom: 1rem; }
 .mrxs { margin-right: .25rem; }
 .mr-auto { margin-right: auto; }
+.ml-auto { margin-left: auto; }
 
 
 /*

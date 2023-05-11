@@ -14,6 +14,7 @@ const LayoutPage = () => {
             <nav className="bg-white pvs df df-end">
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
+                    className="mhm"
                     iconCategory="utility"
                     iconName="settings"
                     iconSize="medium"
