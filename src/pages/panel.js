@@ -35,6 +35,20 @@ const Panel = ({ settings }) => {
         }
     };
 
+    const determineCurrentPage = () => {
+        if(window.location.hash == '#/modal') {
+            return 'Modal';
+        } else if(window.location.hash == '#/tabs') {
+            return 'Tabs';
+        } else if(window.location.hash == '#/multipleErrors') {
+            return 'Multiple Errors';
+        } else if(window.location.hash == '#/errorMessaging') {
+            return 'Error Messaging';
+        } else {
+            return 'Home'
+        }
+    };
+
     return (
         <aside ref={panelRef} className="pam border-l width-25">
             <div className="df df-end">
@@ -48,12 +62,12 @@ const Panel = ({ settings }) => {
                     variant="icon"
                 />
             </div>
-            <h2>Current Page:</h2>
+            <h2>Current Page: {determineCurrentPage()}</h2>
 
             <DropdownMenu
+                label="Pages"
                 className="slds-dropdown"
                 data={pageLinks}
-                label="Pages"
                 useReactRouter={true}
             />
 

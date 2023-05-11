@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useState, useRef } from 'react';
 import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
+import Details from './content/details.js'
 
 function Tabs({ html, overflowBtn }) {
     const tab0_ref = useRef(null);
@@ -14,11 +15,11 @@ function Tabs({ html, overflowBtn }) {
     const overflowBtnRef = useRef(null);
 
     const tabData = [
-        { index: 0, id: '0_tab', ref: tab0_ref, title: 'Accounts', content: 'content for accounts' },
-        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Approvals', content: 'content for Approvals' },
-        { index: 2, id: '2_tab', ref: tab2_ref, title: 'Leads', content: 'content for Leads' },
+        { index: 0, id: '0_tab', ref: tab0_ref, title: 'Details', content: <Details />},
+        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: 'content for Users' },
+        { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: 'content for Accounts' },
         { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: 'content for opportunities' },
-        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Contacts', content: 'content for contacts' },
+        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: 'content for Cases' },
         { index: 5, id: '5_tab', ref: tab5_ref, title: 'Reports', content: 'content for reports' },
         { index: 6, id: '6_tab', ref: tab6_ref, title: 'Favorites', content: 'content for Favorites' },
     ];

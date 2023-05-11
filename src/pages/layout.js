@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import { Button } from '@salesforce/design-system-react';
 
-const LayoutPage = () => {
+const LayoutPage = ({ currentUrl }) => {
     let [asideOpen, setAsideOpen] = useState(false);
 
     const handleSettingsClick = () => {
@@ -14,6 +14,7 @@ const LayoutPage = () => {
             <nav className="bg-white pvs df df-end">
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
+                    className="mhm"
                     iconCategory="utility"
                     iconName="settings"
                     iconSize="medium"
@@ -23,7 +24,7 @@ const LayoutPage = () => {
                 />
             </nav>
             <main>
-                <Outlet context={[asideOpen, handleSettingsClick]} />
+                <Outlet context={[asideOpen, handleSettingsClick, currentUrl]} />
             </main>
         </div>
     );

@@ -14,11 +14,19 @@ const TabsPage = () => {
         { id: 'overflowBtn', labels: { label: 'Overflow Button keyboard'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard }
     ];
 
+    const headerData = {
+        label: 'Darnell Johnson',
+        imageUrl: `${process.env.PUBLIC_URL}/avatar.png`,
+        subtitle1: 'Account Executive',
+        subtitle2: 'd.johnson@testCompany.com',
+
+    };
+
     return (
         <div className="df df-spaceBetween">
             <div className="width-100">
-                <GusHeader />
-                <section>
+                <GusHeader headerData={headerData} />
+                <section className="df bg-white mhl pam border-rounded">
                     <Tabset html={markup} overflowBtn={keyboard} />
                 </section>
             </div>
