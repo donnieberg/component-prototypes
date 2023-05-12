@@ -47,6 +47,7 @@ const MultipleErrors = ({errorStyle}) => {
 
   const handleChange = (e) => {
     return (e) => {
+      e.preventDefault();
       const newState = state.map((element) => {
         return {
           inputValue: e.target.value,
@@ -56,11 +57,14 @@ const MultipleErrors = ({errorStyle}) => {
       setState(newState);
     };
   };  // End handleChange function
+
   const handleSubmit = (event) => {
-    return (e) => {
-    e.preventDefault();
+    console.log('Submitting form.');
+    event.stopPropagation();
+    event.preventDefault();
     const newState = state.map((element) => {
-      if(element.inputValue.length < 1) {
+      console.log(element.label + ': ' + element.inputValue);
+      if(element.isRequired && element.inputValue.length < 1) {
         setDisplayErrors(true);
         return {
           hasError: true,
@@ -70,16 +74,16 @@ const MultipleErrors = ({errorStyle}) => {
       return element;
     });
     setState(newState);
-  }
   };  // End handleSubmit function
+
   const renderForm = () => {
   return (
-    <form onSubmit={handleSubmit()}>
+    <form onSubmit={handleSubmit}>
       {
       state.map(element => {      
         return (
-        <div className="slds-form-element" id={'form-input-' + element.inputId}>
-          <label className="slds-form-element__label" htmlFor={element.inputId}>
+        <div className="slds-form-element" id={'form-input-' + element.inputId} key={element.inputId}>
+          <label className="slds-form-element__label" htmlFor={'input-' + element.inputId}>
             {element.isRequired ? <abbr className="slds-required" title="required">*</abbr> : null}
             {element.label}
           </label>
@@ -91,25 +95,27 @@ const MultipleErrors = ({errorStyle}) => {
               type="text" 
               ref={element.inputRef}
               name={element.inputName}
-              onChange={handleChange}
+              onChange={handleChange()}
             />
           </div>
         </div>
       )})}
-      <button type="submit">Submit form</button>
+      <button type="submit" onClick={handleSubmit}>Submit form</button>
     </form>
   )
   };  // End renderForm function
   const focusInput = (e) => {
     return (e) => {
+      e.preventDefault();
       state.map((element) => {
-        if(e.target.id === 'page-error-' + state.inputId) {
+        if(e.target.id === 'page-error-' + element.inputId) {
           element.inputRef.current.focus();
         }
         return element;
       });
     }
   };  // End focusInput function
+
   const renderLinkError = (element) => {
     return (
       <a href="#"
@@ -120,6 +126,7 @@ const MultipleErrors = ({errorStyle}) => {
       </a>
     );
   };  // End renderLinkError function
+
   const renderPlainError = (element) => {
     return (
       <span>
@@ -127,11 +134,11 @@ const MultipleErrors = ({errorStyle}) => {
       </span>
     )
   };  // End renderPlainError
+
   const renderErrors = () => {
     return (
       <div role={(errorStyle !== 'Link') ? "status" : null}>
         {state.map((element) => {
-          console.log(element.label + ': ' + element.hasError);
           if(!element.hasError) {
             return;
           }
