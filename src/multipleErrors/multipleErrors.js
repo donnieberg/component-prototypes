@@ -1,8 +1,10 @@
-import { useOutletContext } from 'react-router-dom';
+import { useHref, useOutletContext } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 
 const MultipleErrors = ({errorStyle}) => {
-  let [displayErrors, setDisplayErrors] = useState(false);
+  const [displayErrors, setDisplayErrors] = useState(false);
+  const [numberOfErrors, setNumberOfErrors] = useState(0);
+  let errorRef = useRef(null);
   const [state, setState] = useState([
     {inputName: 'fname',
     inputId: '1',
@@ -17,7 +19,7 @@ const MultipleErrors = ({errorStyle}) => {
     isRequired: true,
     label: 'Last name',
     inputRef: useRef(null),
-    hasError: true,
+    hasError: false,
     inputValue: ''
   },
   {inputName: 'email',
@@ -45,35 +47,59 @@ const MultipleErrors = ({errorStyle}) => {
     inputValue: ''
   }]);  // End setup of useState
 
+  const focusFirstErrorInput = () => {
+    let inputAlreadyFocused = false;
+    state.forEach((element) => {
+      if(element.isRequired && element.hasError && !inputAlreadyFocused) {
+        inputAlreadyFocused = true;
+        element.inputRef.current.focus();
+      }
+    });
+  };
+
   const handleChange = (e) => {
     return (e) => {
-      e.preventDefault();
+      e.stopPropagation();
       const newState = state.map((element) => {
+        if('input-' + element.inputId === e.target.id) {
         return {
-          inputValue: e.target.value,
           ...element,
+          inputValue: e.target.value,
+          hasError: false
         }
+      } else return element;
       });
       setState(newState);
     };
   };  // End handleChange function
 
   const handleSubmit = (event) => {
-    console.log('Submitting form.');
+    let errorCount = 0;
+    let errorsFound = false;
     event.stopPropagation();
     event.preventDefault();
-    const newState = state.map((element) => {
-      console.log(element.label + ': ' + element.inputValue);
+    let newState = state.map((element) => {
       if(element.isRequired && element.inputValue.length < 1) {
-        setDisplayErrors(true);
+        errorsFound = true;
+        errorCount++;
+        console.log('Errors found.');
         return {
-          hasError: true,
-          ...element
+          ...element,
+          hasError: true
         }
       }  // End if the form field is empty
-      return element;
+      else return element;
     });
+    console.log('Setting state variables.');
     setState(newState);
+    setNumberOfErrors(errorCount);
+    setDisplayErrors(errorsFound);
+    if(errorCount > 0) {
+      if(errorStyle === 'Link') {
+        errorRef.current.focus();
+      }
+      else focusFirstErrorInput();
+    }
   };  // End handleSubmit function
 
   const renderForm = () => {
@@ -104,6 +130,7 @@ const MultipleErrors = ({errorStyle}) => {
     </form>
   )
   };  // End renderForm function
+
   const focusInput = (e) => {
     return (e) => {
       e.preventDefault();
@@ -122,7 +149,7 @@ const MultipleErrors = ({errorStyle}) => {
         id={'page-error-' + element.inputId}
         onClick={focusInput()}
       >
-        {element.label + ': is a required field.'}
+        {'Error: ' + element.label + ' is a required field.'}
       </a>
     );
   };  // End renderLinkError function
@@ -130,7 +157,8 @@ const MultipleErrors = ({errorStyle}) => {
   const renderPlainError = (element) => {
     return (
       <span>
-        {element.label + ': is a required field.'}
+        {'Error: ' + element.label + ' is a required field.'}
+        <br/>
       </span>
     )
   };  // End renderPlainError
@@ -138,6 +166,7 @@ const MultipleErrors = ({errorStyle}) => {
   const renderErrors = () => {
     return (
       <div role={(errorStyle !== 'Link') ? "status" : null}>
+        <p ref={errorRef} tabindex="-1">The form has {numberOfErrors} errors. Please review them and try again.</p>
         {state.map((element) => {
           if(!element.hasError) {
             return;
@@ -151,7 +180,7 @@ const MultipleErrors = ({errorStyle}) => {
   return (
     <div className="pam">
       <h2>Multiple Errors</h2>
-      {renderErrors()}
+      {displayErrors ? renderErrors() : null}
       {renderForm()}
     </div>
   );
