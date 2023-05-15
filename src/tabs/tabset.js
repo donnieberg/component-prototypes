@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useState, useRef } from 'react';
 import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
+import Details from './content/details.js'
 
 function Tabs({ html, overflowBtn }) {
     const tab0_ref = useRef(null);
@@ -11,13 +12,14 @@ function Tabs({ html, overflowBtn }) {
     const tab4_ref = useRef(null);
     const tab5_ref = useRef(null);
     const tab6_ref = useRef(null);
+    const overflowBtnRef = useRef(null);
 
     const tabData = [
-        { index: 0, id: '0_tab', ref: tab0_ref, title: 'Accounts', content: 'content for accounts' },
-        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Approvals', content: 'content for Approvals' },
-        { index: 2, id: '2_tab', ref: tab2_ref, title: 'Leads', content: 'content for Leads' },
+        { index: 0, id: '0_tab', ref: tab0_ref, title: 'Details', content: <Details />},
+        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: 'content for Users' },
+        { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: 'content for Accounts' },
         { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: 'content for opportunities' },
-        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Contacts', content: 'content for contacts' },
+        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: 'content for Cases' },
         { index: 5, id: '5_tab', ref: tab5_ref, title: 'Reports', content: 'content for reports' },
         { index: 6, id: '6_tab', ref: tab6_ref, title: 'Favorites', content: 'content for Favorites' },
     ];
@@ -28,15 +30,21 @@ function Tabs({ html, overflowBtn }) {
     const handleKeyDown = (index) => {
         return (e) => {
             let nextFocusTab;
-            console.log(index)
+            let nextFocusEl;
+
             if(e.keyCode == utils.keys.right) {
-                nextFocusTab = currentData[index + 1];
+                if(index >= 3 && overflowBtn == 'arrow'){
+                    overflowBtnRef.current.focus() 
+                    nextFocusTab = { id: 'overflowBtnTab' };
+                } else {
+                    nextFocusTab = currentData[index + 1];
+                }  
             } else if (e.keyCode == utils.keys.left) {
                 nextFocusTab = currentData[index - 1];
+            } else if(e.keyCode == utils.keys.down) {
+                console.log('down')
             }
-            const nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
-            console.log(currentData)
-            console.log(nextFocusTab)
+            nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
             if(nextFocusEl) {
                 nextFocusEl.focus()
                 setCurrentTab(currentTab = nextFocusTab)
@@ -111,7 +119,7 @@ function Tabs({ html, overflowBtn }) {
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
-                <li className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
+                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex="-1" className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
                     <DropdownMenu 
                         data={currentData.slice(4)} 
                         label="More"
