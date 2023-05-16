@@ -7,8 +7,7 @@ import utils from '../utils.js'
 const Panel = ({ settings }) => {
     const pageLinks = [
         { id: 'page1', link: '', title: 'Home' },
-        { id: 'page2', link: 'tabs', title: 'Tabs' },
-        { id: 'page3', link: 'modal', title: 'Modal' },
+        { id: 'page2', link: 'recordHome', title: 'Record Home' },
         { id: 'page4', link: 'multipleErrors', title: 'multipleErrors' },
         { id: 'page5', link: 'errorMessaging', title: 'errorMessaging' },
     ];
@@ -36,10 +35,8 @@ const Panel = ({ settings }) => {
     };
 
     const determineCurrentPage = () => {
-        if(window.location.hash == '#/modal') {
-            return 'Modal';
-        } else if(window.location.hash == '#/tabs') {
-            return 'Tabs';
+        if(window.location.hash == '#/recordHome') {
+            return 'Record Home';
         } else if(window.location.hash == '#/multipleErrors') {
             return 'Multiple Errors';
         } else if(window.location.hash == '#/errorMessaging') {
