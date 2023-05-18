@@ -7,6 +7,9 @@ const LayoutPage = ({ currentUrl }) => {
 
     const handleSettingsClick = () => {
         setAsideOpen(asideOpen = !asideOpen);
+        if(!asideOpen){
+            document.getElementById("settingsButtonRef").focus();
+        }
     };
 
     return (
@@ -15,6 +18,7 @@ const LayoutPage = ({ currentUrl }) => {
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
                     className="mhm"
+                    id="settingsButtonRef"
                     iconCategory="utility"
                     iconName="settings"
                     iconSize="medium"

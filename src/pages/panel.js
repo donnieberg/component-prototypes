@@ -13,9 +13,9 @@ const Panel = ({ settings }) => {
     ];
 
     const [panelOpen, handleSettingsClick] = useOutletContext();
-    const panelRef = useRef(null);
 
     useEffect(() => {
+        document.getElementById('buttonRef').focus();
         const handleEsc = (event) => {
             if (event.keyCode === 27) {
                 handleSettingsClick()
@@ -47,10 +47,11 @@ const Panel = ({ settings }) => {
     };
 
     return (
-        <aside ref={panelRef} className="pam border-l width-25">
+        <aside className="pam border-l width-25">
             <div className="df df-end">
                 <Button
                     assistiveText={{ icon: 'Close' }}
+                    id="buttonRef"
                     iconCategory="utility"
                     iconName="close"
                     iconSize="medium"
