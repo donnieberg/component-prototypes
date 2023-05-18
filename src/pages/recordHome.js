@@ -10,11 +10,13 @@ const RecordHomePage = () => {
     let [markup, setMarkup] = useState('heading');
     let [keyboard, setKeyboard] = useState('tab');
     let [initialFocus, setInitialFocus] = useState('close');
+    let [pillBehavior, setPillBehavior] = useState('button');
 
     const settings = [
-        { id: 'tabMarkup', labels: { label: 'Markup for Tabset HTML'}, options: ['heading', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
+        { id: 'tabMarkup', labels: { label: 'Markup for Tabset HTML'}, options: ['h2', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
         { id: 'overflowBtn', labels: { label: 'Overflow Button keyboard'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard },
         { id: 'initialFocus', labels: { label: 'Initial Focus'}, options: ['close', 'heading', 'formField'], currentOption: initialFocus, setOptionHandler: setInitialFocus },
+        { id: 'pills', labels: { label: 'Pill Behavior'}, options: ['listbox', 'button'], currentOption: pillBehavior, setOptionHandler: setPillBehavior },
     ];
 
     const headerData = {
@@ -29,7 +31,7 @@ const RecordHomePage = () => {
             <div className="width-100">
                 <GusHeader headerData={headerData} showModal={true} initialFocus={initialFocus} />
                 <section className="df bg-white mhl pam border-rounded">
-                    <Tabset html={markup} overflowBtn={keyboard} />
+                    <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} />
                 </section>
             </div>
             {panelOpen ? <Panel settings={settings} /> : null }
