@@ -7,16 +7,15 @@ import utils from '../utils.js'
 const Panel = ({ settings }) => {
     const pageLinks = [
         { id: 'page1', link: '', title: 'Home' },
-        { id: 'page2', link: 'tabs', title: 'Tabs' },
-        { id: 'page3', link: 'modal', title: 'Modal' },
+        { id: 'page2', link: 'recordHome', title: 'Record Home' },
         { id: 'page4', link: 'multipleErrors', title: 'multipleErrors' },
         { id: 'page5', link: 'errorMessaging', title: 'errorMessaging' },
     ];
 
     const [panelOpen, handleSettingsClick] = useOutletContext();
-    const panelRef = useRef(null);
 
     useEffect(() => {
+        document.getElementById('buttonRef').focus();
         const handleEsc = (event) => {
             if (event.keyCode === 27) {
                 handleSettingsClick()
@@ -36,10 +35,8 @@ const Panel = ({ settings }) => {
     };
 
     const determineCurrentPage = () => {
-        if(window.location.hash == '#/modal') {
-            return 'Modal';
-        } else if(window.location.hash == '#/tabs') {
-            return 'Tabs';
+        if(window.location.hash == '#/recordHome') {
+            return 'Record Home';
         } else if(window.location.hash == '#/multipleErrors') {
             return 'Multiple Errors';
         } else if(window.location.hash == '#/errorMessaging') {
@@ -50,10 +47,11 @@ const Panel = ({ settings }) => {
     };
 
     return (
-        <aside ref={panelRef} className="pam border-l width-25">
+        <aside className="pam border-l width-25">
             <div className="df df-end">
                 <Button
                     assistiveText={{ icon: 'Close' }}
+                    id="buttonRef"
                     iconCategory="utility"
                     iconName="close"
                     iconSize="medium"

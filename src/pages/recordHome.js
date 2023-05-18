@@ -1,18 +1,22 @@
-import Panel from './panel.js'
 import Tabset from '../tabs/tabset.js'
+import Panel from './panel.js'
 import GusHeader from './templates/header.js'
 import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
 import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-system-react';
 
-const ModalPage = () => {
+const RecordHomePage = () => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
-    let [initialFocus, setInitialFocus] = useState('close');
-    let [markup, setMarkup] = useState('heading');
+    let [markup, setMarkup] = useState('h2');
     let [keyboard, setKeyboard] = useState('tab');
+    let [initialFocus, setInitialFocus] = useState('close');
+    let [pillBehavior, setPillBehavior] = useState('button');
 
     const settings = [
+        { id: 'tabMarkup', labels: { label: 'Markup for Tabset HTML'}, options: ['h2', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
+        { id: 'overflowBtn', labels: { label: 'Overflow Button keyboard'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard },
         { id: 'initialFocus', labels: { label: 'Initial Focus'}, options: ['close', 'heading', 'formField'], currentOption: initialFocus, setOptionHandler: setInitialFocus },
+        { id: 'pills', labels: { label: 'Pill Behavior'}, options: ['listbox', 'button'], currentOption: pillBehavior, setOptionHandler: setPillBehavior },
     ];
 
     const headerData = {
@@ -27,7 +31,7 @@ const ModalPage = () => {
             <div className="width-100">
                 <GusHeader headerData={headerData} showModal={true} initialFocus={initialFocus} />
                 <section className="df bg-white mhl pam border-rounded">
-                    <Tabset html={markup} overflowBtn={keyboard} />
+                    <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} />
                 </section>
             </div>
             {panelOpen ? <Panel settings={settings} /> : null }
@@ -35,4 +39,4 @@ const ModalPage = () => {
     );
 };
 
-export default ModalPage;
+export default RecordHomePage;

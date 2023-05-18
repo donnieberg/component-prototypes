@@ -3,8 +3,9 @@ import { useState, useRef } from 'react';
 import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
 import Details from './content/details.js'
+import Pills from '../pills/pills.js'
 
-function Tabs({ html, overflowBtn }) {
+function Tabs({ html, overflowBtn, pillBehavior }) {
     const tab0_ref = useRef(null);
     const tab1_ref = useRef(null);
     const tab2_ref = useRef(null);
@@ -16,7 +17,7 @@ function Tabs({ html, overflowBtn }) {
 
     const tabData = [
         { index: 0, id: '0_tab', ref: tab0_ref, title: 'Details', content: <Details />},
-        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: 'content for Users' },
+        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: <Pills pillBehavior={pillBehavior} /> },
         { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: 'content for Accounts' },
         { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: 'content for opportunities' },
         { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: 'content for Cases' },
@@ -26,6 +27,7 @@ function Tabs({ html, overflowBtn }) {
 
     let [currentTab, setCurrentTab] = useState(tabData[0]);
     let [currentData, setCurrentData] = useState(tabData);
+    let [openDropdown, setOpenDropdown] = useState(false);
 
     const handleKeyDown = (index) => {
         return (e) => {
@@ -42,13 +44,21 @@ function Tabs({ html, overflowBtn }) {
             } else if (e.keyCode == utils.keys.left) {
                 nextFocusTab = currentData[index - 1];
             } else if(e.keyCode == utils.keys.down) {
-                console.log('down')
+                if(overflowBtn == 'arrow') {
+                    setOpenDropdown(openDropdown = true);
+                }
             }
             nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
             if(nextFocusEl) {
                 nextFocusEl.focus()
                 setCurrentTab(currentTab = nextFocusTab)
             }
+        }
+    };
+
+    const handleOnClick = (index) => {
+        return () => {
+            setCurrentTab(currentTab = currentData[index]);
         }
     };
 
@@ -78,13 +88,15 @@ function Tabs({ html, overflowBtn }) {
                     })}
                 title="Item One" 
                 role="presentation">
-                <a className="slds-tabs_default__link" href="#" 
+                <a className="slds-tabs_default__link" 
+                    href="javascript:void(0)"
                     role="tab" 
                     ref={data.ref}
                     tabIndex={currentTab.index == data.index ? "0" : "-1"} 
                     aria-selected={currentTab.index == data.index ? "true" : "false"}
                     aria-controls={`tab-default-${data.index}`}
                     onKeyDown={handleKeyDown(i)}
+                    onClick={handleOnClick(i)}
                     id={data.id}>
                     {data.title}
                 </a>
@@ -102,14 +114,15 @@ function Tabs({ html, overflowBtn }) {
                         'slds-hide': currentTab.index != data.index, 
                     })}
                 role="tabpanel" 
-                aria-labelledby={data.id}>
-                <h2>{data.content}</h2>
+                aria-labelledby={data.id}
+            >
+                {data.id == '1_tab' ? <Pills pillBehavior={pillBehavior} /> : data.content}
             </div>
         )
     });
 
     const renderHeading = () => {
-        if(html == 'heading') {
+        if(html == 'h2') {
             return <h2 className="slds-assistive-text">Tabs</h2>
         }
     };
@@ -119,12 +132,15 @@ function Tabs({ html, overflowBtn }) {
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
-                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex="-1" className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
+                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex={overflowBtn == 'tab' ? '-1' : '0'} className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
                     <DropdownMenu 
                         data={currentData.slice(4)} 
                         label="More"
                         handleMenuSelection={handleMenuSelection}
-                        />
+                        openDropdown={openDropdown}
+                        overflowBtn={overflowBtn}
+                        setOpenDropdown={setOpenDropdown}
+                    />
                 </li>
             </ul>
             {tabContent}
