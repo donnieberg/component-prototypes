@@ -7,7 +7,7 @@ import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-sy
 
 const RecordHomePage = () => {
     const [panelOpen, handleSettingsClick] = useOutletContext();
-    let [markup, setMarkup] = useState('heading');
+    let [markup, setMarkup] = useState('h2');
     let [keyboard, setKeyboard] = useState('tab');
     let [initialFocus, setInitialFocus] = useState('close');
     let [pillBehavior, setPillBehavior] = useState('button');

@@ -27,6 +27,7 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
 
     let [currentTab, setCurrentTab] = useState(tabData[0]);
     let [currentData, setCurrentData] = useState(tabData);
+    let [openDropdown, setOpenDropdown] = useState(false);
 
     const handleKeyDown = (index) => {
         return (e) => {
@@ -43,7 +44,9 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
             } else if (e.keyCode == utils.keys.left) {
                 nextFocusTab = currentData[index - 1];
             } else if(e.keyCode == utils.keys.down) {
-                console.log('down')
+                if(overflowBtn == 'arrow') {
+                    setOpenDropdown(openDropdown = true);
+                }
             }
             nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
             if(nextFocusEl) {
@@ -129,11 +132,14 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
-                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex="-1" className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
+                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex={overflowBtn == 'tab' ? '-1' : '0'} className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
                     <DropdownMenu 
                         data={currentData.slice(4)} 
                         label="More"
                         handleMenuSelection={handleMenuSelection}
+                        openDropdown={openDropdown}
+                        overflowBtn={overflowBtn}
+                        setOpenDropdown={setOpenDropdown}
                     />
                 </li>
             </ul>
