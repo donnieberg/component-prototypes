@@ -13,6 +13,7 @@ const Panel = ({ settings }) => {
     ];
 
     const [panelOpen, handleSettingsClick] = useOutletContext();
+    let [openDropdown, setOpenDropdown] = useState(false);
 
     useEffect(() => {
         document.getElementById('buttonRef').focus();
@@ -67,6 +68,8 @@ const Panel = ({ settings }) => {
                 className="slds-dropdown"
                 data={pageLinks}
                 useReactRouter={true}
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
             />
 
             {settings && settings.map((setting) => {
