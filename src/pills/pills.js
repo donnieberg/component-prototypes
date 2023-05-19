@@ -1,24 +1,41 @@
 import { useState, useRef } from 'react';
-import { Button, Input, InputIcon } from '@salesforce/design-system-react';
+import { Button, Input, InputIcon, Icon } from '@salesforce/design-system-react';
 import utils from '../utils.js'
+import Menu from '../dropdownMenu/menu.js';
+import classnames from "classnames";
 
 function Pills({ pillBehavior }) {
     const data = [
-        { id: 'pill0', label: 'label 0', selected: true },
-        { id: 'pill1', label: 'label 1', selected: false },
-        { id: 'pill2', label: 'label 2', selected: false },
-        { id: 'pill3', label: 'label 3', selected: false },
-        { id: 'pill4', label: 'label 4', selected: false },
-        { id: 'pill5', label: 'label 5', selected: false },
+        { id: 'pill0', title: 'label 0', selected: true },
+        { id: 'pill1', title: 'label 1', selected: false },
+        { id: 'pill2', title: 'label 2', selected: false },
+        { id: 'pill3', title: 'label 3', selected: false },
+        { id: 'pill4', title: 'label 4', selected: false },
+        { id: 'pill5', title: 'label 5', selected: false },
     ];
 
+    let inputRef = useRef(null);
+    let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
+    let [openDropdown, setOpenDropdown] = useState(false);
     let [currentPill, setCurrentPill] = useState(data[0]);
     let [currentSelected, setCurrentSelected] = useState(data.slice(0, 3));
 
-    let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
-    let [openDropdown, setOpenDropdown] = useState(false);
-
     // Dropdown -----------------------------------
+    // ---------------------------------------------------------------------------------------
+    //
+    const toggleMenuSelection = (item) => {
+        return () => {
+            const index = currentSelected.findIndex(obj => obj.id === item.id);
+            if(index > 0) {
+                const newData = currentSelected.filter(pill => { return pill.id != item.id });
+                setCurrentSelected(currentSelected = newData);
+            } else {
+                const newData = [...currentSelected, item]
+                setCurrentSelected(currentSelected = newData);
+            }
+        }
+    };
+
     const handleKeyDownButton = (e) => {
         if(e.keyCode == utils.keys.down) {
             setOpenDropdown(openDropdown = true);
@@ -36,17 +53,17 @@ function Pills({ pillBehavior }) {
             } else if(e.keyCode == utils.keys.up && currentFocusIndex > 0) {
                 setCurrentFocusIndex(currentFocusIndex - 1)
             } else if(e.keyCode == utils.keys.enter) {
-                setTimeout(() => {
-                    //toggleMenu()
-                }, 0);
+                toggleMenuSelection(item)();
             } else if(e.keyCode == utils.keys.esc) {
                 setOpenDropdown(openDropdown = false);
-                //ref.current.focus();
+                inputRef.current.focus();
             }
         }
     };
 
     // Pill container --------------------------------
+    // ---------------------------------------------------------------------------------------
+
     const handleDelete = (index) => {
         return () => {
             let nextFocusPill;
@@ -63,7 +80,7 @@ function Pills({ pillBehavior }) {
         }
     };
 
-    const handleKeyDown = (index) => {
+    const handleKeyDownPill = (index) => {
         return (e) => {
             let nextFocusPill;
             let nextFocusEl;
@@ -87,6 +104,12 @@ function Pills({ pillBehavior }) {
         }
     };
 
+    const filterSelectedPills = (item) => {
+        return currentSelected.filter(pill => {
+            return pill.id == item.id;
+        });
+    };
+
     const renderButtonPills = () => {
         return (
             <div className="slds-pill_container">
@@ -95,7 +118,7 @@ function Pills({ pillBehavior }) {
                         return (
                             <li key={pill.id} className="slds-listbox-item" role="presentation">
                                 <span className="slds-pill">
-                                    <span className="slds-pill__label">{pill.label}</span>
+                                    <span className="slds-pill__label">{pill.title}</span>
                                     <Button
                                         assistiveText={{ icon: 'Remove' }}
                                         id={pill.id}
@@ -129,9 +152,9 @@ function Pills({ pillBehavior }) {
                                     id={pill.id}
                                     tabIndex={i == 0 ? "0" : "-1"} 
                                     aria-selected={currentPill == pill}
-                                    onKeyDown={handleKeyDown(i)}
+                                    onKeyDown={handleKeyDownPill(i)}
                                 >
-                                    <span className="slds-pill__label">{pill.label}</span>
+                                    <span className="slds-pill__label">{pill.title}</span>
                                     <Button
                                         assistiveText={{ icon: 'Remove' }}
                                         iconCategory="utility"
@@ -151,41 +174,34 @@ function Pills({ pillBehavior }) {
         )
     };
 
-    const renderCombobox = () => {
-        return (
-            <ul role="listbox">
-                {data.map(item => {
-                    return (
-                        <li role="option">
-                            {item.label}
-                        </li>
-                    )
-                })}
-            </ul>
-        )
-    };
-
     return (
         <div>
             <div className="slds-form-element">
-                <label className="slds-form-element__label" for="text-input-id-51">Choose Accounts</label>
-                <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                <label id="pillInputId" className="slds-form-element__label">Choose Accounts</label>
+                <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                    <div 
+                        role="combobox" 
+                        tabIndex="0" 
+                        className="slds-input_faux slds-combobox__input" 
+                        id="combobox-1" 
+                        aria-labelledby="pillInputId"
+                        aria-controls="listbox-1" 
+                        aria-expanded="false" 
+                        aria-haspopup="listbox"
+                        onKeyDown={handleKeyDownButton}
+                        ref={inputRef}
+                    >
+                        <span className="slds-truncate">{currentSelected.length > 0 ? `${currentSelected.length} options selected` : "Select an Option…"}</span>
+                    </div>
                     <InputIcon
-                        assistiveText={{
-                            icon: 'Search',
-                        }}
-                        name="search"
+                        assistiveText={{ icon: 'Down' }}
+                        name="down"
+                        size="small"
                         category="utility"
-                    />
-                    <input 
-                        type="text" 
-                        id="text-input-id-51" 
-                        placeholder="Search..." 
-                        className="slds-input" 
                     />
                 </div>
             </div>
-            {renderCombobox()}
+            {openDropdown ? <Menu data={data} linkVariant='option' handleKeyDownMenu={handleKeyDownMenu} handleOnClick={toggleMenuSelection} currentFocusIndex={currentFocusIndex} currentSelected={currentSelected} /> : null}
             {pillBehavior == 'listbox' ? renderListboxPills() : renderButtonPills()}
         </div>
     )

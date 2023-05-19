@@ -5,7 +5,7 @@ import { Icon } from '@salesforce/design-system-react';
 import utils from '../utils.js';
 import Menu from './menu.js';
 
-function DropdownMenu({ data, useReactRouter, label, handleMenuSelection, openDropdown, setOpenDropdown, overflowBtn }) {
+function DropdownMenu({ data, linkVariant, label, handleMenuSelection, openDropdown, setOpenDropdown, overflowBtn }) {
     let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
     const ref = useRef(null);
 
@@ -36,7 +36,7 @@ function DropdownMenu({ data, useReactRouter, label, handleMenuSelection, openDr
             } else if(e.keyCode == utils.keys.up && currentFocusIndex > 0) {
                 setCurrentFocusIndex(currentFocusIndex - 1)
             } else if(e.keyCode == utils.keys.enter) {
-                if(!useReactRouter) {
+                if(linkVariant != 'reactRouter') {
                     handleMenuSelection(item)
                 }
                 setTimeout(() => {
@@ -70,7 +70,7 @@ function DropdownMenu({ data, useReactRouter, label, handleMenuSelection, openDr
                     size="xx-small"
                 />
             </button>
-            {openDropdown ? <Menu data={data} useReactRouter={useReactRouter} handleKeyDownMenu={handleKeyDownMenu} handleOnClick={handleOnClickMenu} currentFocusIndex={currentFocusIndex} /> : null}
+            {openDropdown ? <Menu data={data} linkVariant={linkVariant} handleKeyDownMenu={handleKeyDownMenu} handleOnClick={handleOnClickMenu} currentFocusIndex={currentFocusIndex} /> : null}
         </div>
     )
 
