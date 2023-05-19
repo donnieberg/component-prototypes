@@ -26,7 +26,7 @@ function Pills({ pillBehavior }) {
     const toggleMenuSelection = (item) => {
         return () => {
             const index = currentSelected.findIndex(obj => obj.id === item.id);
-            if(index > 0) {
+            if(index >= 0) {
                 const newData = currentSelected.filter(pill => { return pill.id != item.id });
                 setCurrentSelected(currentSelected = newData);
             } else {
@@ -189,6 +189,7 @@ function Pills({ pillBehavior }) {
                         aria-expanded="false" 
                         aria-haspopup="listbox"
                         onKeyDown={handleKeyDownButton}
+                        onClick={() => { setOpenDropdown(openDropdown = !openDropdown)}}
                         ref={inputRef}
                     >
                         <span className="slds-truncate">{currentSelected.length > 0 ? `${currentSelected.length} options selected` : "Select an Option…"}</span>
