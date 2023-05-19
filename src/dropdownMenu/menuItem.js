@@ -14,7 +14,10 @@ function MenuItem(props) {
     const renderLink = () => {
         if(useReactRouter) {
             return (
-                <Link to={`/${item.link}`} ref={ref} onKeyDown={handleKeyDown(item)}>
+                <Link 
+                    to={`/${item.link}`} 
+                    ref={ref} 
+                >
                     {item.title}
                 </Link>
             )
