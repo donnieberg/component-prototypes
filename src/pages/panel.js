@@ -67,7 +67,7 @@ const Panel = ({ settings }) => {
                 label="Pages"
                 className="slds-dropdown"
                 data={pageLinks}
-                useReactRouter={true}
+                linkVariant="reactRouter"
                 openDropdown={openDropdown}
                 setOpenDropdown={setOpenDropdown}
             />

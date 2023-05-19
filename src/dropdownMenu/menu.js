@@ -3,8 +3,11 @@ import { useState } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import MenuItem from './menuItem.js';
 
-function Menu({ data, useReactRouter, handleOnClick, handleKeyDownMenu, currentFocusIndex }) {
+function Menu({ data, linkVariant, handleOnClick, handleKeyDownMenu, currentFocusIndex, currentSelected }) {
     const menuItems = data.map((item, index) => {
+        const matchesArr = currentSelected && currentSelected.filter(pill => {
+            return pill.id == item.id;
+        });
         return <MenuItem 
             key={item.id} 
             item={item} 
@@ -12,12 +15,22 @@ function Menu({ data, useReactRouter, handleOnClick, handleKeyDownMenu, currentF
             currentFocusIndex={currentFocusIndex}
             handleKeyDown={handleKeyDownMenu}
             handleOnClick={handleOnClick}
-            useReactRouter={useReactRouter} />;
+            linkVariant={linkVariant} 
+            renderCheckMark={matchesArr && matchesArr.length > 0}
+        />;
     });
 
+    const menuClassNames = () => {
+        if(linkVariant == 'option') {
+            return "slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid slds-listbox slds-listbox_vertical"
+        } else {
+            return "slds-dropdown slds-dropdown_left slds-dropdown__list slds-dropdown_length-with-icon-10"
+        }
+    };
+
     return (
-        <div className="slds-dropdown slds-dropdown_left">
-            <ul className="slds-dropdown__list slds-dropdown_length-with-icon-10" role="menu">
+        <div className={menuClassNames()}>
+            <ul className="" role={linkVariant == 'option' ? "listbox" : "menu"}>
                 {menuItems}
             </ul>
         </div>

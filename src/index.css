@@ -95,6 +95,7 @@ dialog::backdrop {
  * Colors & Styles
  */
 .bg-white { background-color: white; }
+.bg-hover { background-color: #f3f3f3; }
 .border-l { border-left: 1px solid black; }
 
 .border-rounded { border-radius: .5rem; }
