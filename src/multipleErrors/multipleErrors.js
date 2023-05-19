@@ -62,12 +62,18 @@ const MultipleErrors = ({errorStyle}) => {
       e.stopPropagation();
       const newState = state.map((element) => {
         if('input-' + element.inputId === e.target.id) {
-        return {
-          ...element,
-          inputValue: e.target.value,
-          hasError: false
-        }
-      } else return element;
+          if(e.target.value.length < 1) {
+            return {
+              ...element,
+              inputValue: e.target.value,
+              hasError: false
+            }
+          } else return {
+            ...element,
+            hasError: true,
+            inputValue: e.target.value
+          }
+        } else return element;
       });
       setState(newState);
     };
@@ -82,7 +88,7 @@ const MultipleErrors = ({errorStyle}) => {
       if(element.isRequired && element.inputValue.length < 1) {
         errorsFound = true;
         errorCount++;
-        console.log('Errors found.');
+        element.inputRef.current.setAttribute('aria-describedby', 'input-error-' + element.inputId);
         return {
           ...element,
           hasError: true
@@ -90,23 +96,27 @@ const MultipleErrors = ({errorStyle}) => {
       }  // End if the form field is empty
       else return element;
     });
-    console.log('Setting state variables.');
     setState(newState);
     setNumberOfErrors(errorCount);
     setDisplayErrors(errorsFound);
-    if(errorCount > 0) {
-      if(errorStyle === 'Link') {
-        errorRef.current.focus();
-      }
-      else focusFirstErrorInput();
-    }
+    setFocus();
   };  // End handleSubmit function
+
+  const renderErrorText = (element) => {
+    if(element.hasError) {
+        return (
+            <div className="slds-form-element__help">Complete this field</div>
+        )  // End return JSX
+    }  // End if hasError
+    else return;
+  };  // End renderErrorText function
 
   const renderForm = () => {
   return (
     <form onSubmit={handleSubmit}>
+      {displayErrors ? renderErrors() : null}
       {
-      state.map(element => {      
+      state.map((element) => {      
         return (
         <div className="slds-form-element" id={'form-input-' + element.inputId} key={element.inputId}>
           <label className="slds-form-element__label" htmlFor={'input-' + element.inputId}>
@@ -121,15 +131,25 @@ const MultipleErrors = ({errorStyle}) => {
               type="text" 
               ref={element.inputRef}
               name={element.inputName}
-              onChange={handleChange()}
+              onChange={handleChange}
             />
           </div>
+          <div id={'input-error-' + element.inputId}>{renderErrorText(element)}</div>
         </div>
       )})}
       <button type="submit" onClick={handleSubmit}>Submit form</button>
     </form>
-  )
+    )
   };  // End renderForm function
+
+  const setFocus = () => {
+    if(numberOfErrors > 0) {
+      if(errorStyle === 'Link') {
+        errorRef.current.focus();
+      }
+      else focusFirstErrorInput();
+    }
+  };  // End setFocus function
 
   const focusInput = (e) => {
     return (e) => {
@@ -166,7 +186,7 @@ const MultipleErrors = ({errorStyle}) => {
   const renderErrors = () => {
     return (
       <div role={(errorStyle !== 'Link') ? "status" : null}>
-        <p ref={errorRef} tabindex="-1">The form has {numberOfErrors} errors. Please review them and try again.</p>
+        <p ref={errorRef} tabIndex="-1">The form has {numberOfErrors} errors. Please review them and try again.</p>
         {state.map((element) => {
           if(!element.hasError) {
             return;
@@ -180,7 +200,6 @@ const MultipleErrors = ({errorStyle}) => {
   return (
     <div className="pam">
       <h2>Multiple Errors</h2>
-      {displayErrors ? renderErrors() : null}
       {renderForm()}
     </div>
   );
