@@ -5,7 +5,7 @@ const MultipleErrors = ({errorStyle}) => {
   const [displayErrors, setDisplayErrors] = useState(false);
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   let errorRef = useRef(null);
-  const [state, setState] = useState([
+  const initialFormFields = [
     {inputName: 'fname',
     inputId: '1',
     label: 'First name',
@@ -45,7 +45,8 @@ const MultipleErrors = ({errorStyle}) => {
     inputRef: useRef(null),
     hasError: false,
     inputValue: ''
-  }]);  // End setup of useState
+  }];
+  const [state, setState] = useState(initialFormFields);
 
   const focusFirstErrorInput = () => {
     let inputAlreadyFocused = false;
@@ -76,13 +77,16 @@ const MultipleErrors = ({errorStyle}) => {
   const handleSubmit = (event) => {
     let errorCount = 0;
     let errorsFound = false;
+    let elementRef = null;
     event.stopPropagation();
     event.preventDefault();
     let newState = state.map((element) => {
       if(element.isRequired && element.inputValue.length < 1) {
+        if(!errorsFound) {
+          elementRef = element.inputRef;
+        }
         errorsFound = true;
         errorCount++;
-        console.log('Errors found.');
         return {
           ...element,
           hasError: true
@@ -90,7 +94,6 @@ const MultipleErrors = ({errorStyle}) => {
       }  // End if the form field is empty
       else return element;
     });
-    console.log('Setting state variables.');
     setState(newState);
     setNumberOfErrors(errorCount);
     setDisplayErrors(errorsFound);
@@ -98,13 +101,16 @@ const MultipleErrors = ({errorStyle}) => {
       if(errorStyle === 'Link') {
         errorRef.current.focus();
       }
-      else focusFirstErrorInput();
+      else elementRef.current.focus();
     }
   };  // End handleSubmit function
 
   const renderForm = () => {
   return (
     <form onSubmit={handleSubmit}>
+      <div ref={errorRef} tabIndex="-1" role={(errorStyle !== 'Link') ? "status" : null} >
+        {displayErrors ? renderErrors() : null}
+      </div>
       {
       state.map(element => {      
         return (
@@ -131,6 +137,9 @@ const MultipleErrors = ({errorStyle}) => {
   )
   };  // End renderForm function
 
+  const setFocus = () => {
+  };
+
   const focusInput = (e) => {
     return (e) => {
       e.preventDefault();
@@ -147,6 +156,7 @@ const MultipleErrors = ({errorStyle}) => {
     return (
       <a href="#"
         id={'page-error-' + element.inputId}
+        key={'page-error-' + element.inputId}
         onClick={focusInput()}
       >
         {'Error: ' + element.label + ' is a required field.'}
@@ -156,7 +166,7 @@ const MultipleErrors = ({errorStyle}) => {
 
   const renderPlainError = (element) => {
     return (
-      <span>
+      <span key={'span-error-' + element.inputId}>
         {'Error: ' + element.label + ' is a required field.'}
         <br/>
       </span>
@@ -165,8 +175,8 @@ const MultipleErrors = ({errorStyle}) => {
 
   const renderErrors = () => {
     return (
-      <div role={(errorStyle !== 'Link') ? "status" : null}>
-        <p ref={errorRef} tabindex="-1">The form has {numberOfErrors} errors. Please review them and try again.</p>
+      <div>
+        <p >The form has {numberOfErrors} errors. Please review them and try again.</p>
         {state.map((element) => {
           if(!element.hasError) {
             return;
@@ -180,7 +190,6 @@ const MultipleErrors = ({errorStyle}) => {
   return (
     <div className="pam">
       <h2>Multiple Errors</h2>
-      {displayErrors ? renderErrors() : null}
       {renderForm()}
     </div>
   );
