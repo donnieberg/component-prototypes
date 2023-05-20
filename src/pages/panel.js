@@ -51,7 +51,7 @@ const Panel = ({ settings }) => {
         <aside id="panel"className="pam border-l width-25">
             <div className="df df-end">
                 <Button
-                    assistiveText={{ icon: 'Close' }}
+                    assistiveText={{ icon: 'Close Panel' }}
                     id="buttonRef"
                     iconCategory="utility"
                     iconName="close"

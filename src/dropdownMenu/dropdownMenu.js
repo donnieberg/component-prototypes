@@ -4,6 +4,7 @@ import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import { Icon } from '@salesforce/design-system-react';
 import utils from '../utils.js';
 import Menu from './menu.js';
+import { ClickAwayListener } from '@mui/base';
 
 function DropdownMenu({ data, linkVariant, label, handleMenuSelection, openDropdown, setOpenDropdown, overflowBtn }) {
     let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
@@ -11,6 +12,10 @@ function DropdownMenu({ data, linkVariant, label, handleMenuSelection, openDropd
 
     const toggleMenu = () => {
         setOpenDropdown(openDropdown = !openDropdown)
+    };
+
+    const handleClickAway = () => {
+        setOpenDropdown(openDropdown = false);
     };
 
     const handleOnClickMenu = (item) => {
@@ -51,6 +56,7 @@ function DropdownMenu({ data, linkVariant, label, handleMenuSelection, openDropd
 
 
     return (
+        <ClickAwayListener onClickAway={handleClickAway}>
         <div className={classNames("slds-dropdown-trigger slds-dropdown-trigger_click", {"slds-is-open": openDropdown})}>
             <button 
                 ref={ref} 
@@ -72,6 +78,7 @@ function DropdownMenu({ data, linkVariant, label, handleMenuSelection, openDropd
             </button>
             {openDropdown ? <Menu data={data} linkVariant={linkVariant} handleKeyDownMenu={handleKeyDownMenu} handleOnClick={handleOnClickMenu} currentFocusIndex={currentFocusIndex} /> : null}
         </div>
+        </ClickAwayListener>
     )
 
 }

@@ -3,15 +3,17 @@ import { Button, Input, InputIcon, Icon } from '@salesforce/design-system-react'
 import utils from '../utils.js'
 import Menu from '../dropdownMenu/menu.js';
 import classnames from "classnames";
+import { ClickAwayListener } from '@mui/base';
 
 function Pills({ pillBehavior }) {
     const data = [
-        { id: 'pill0', title: 'label 0', selected: true },
-        { id: 'pill1', title: 'label 1', selected: false },
-        { id: 'pill2', title: 'label 2', selected: false },
-        { id: 'pill3', title: 'label 3', selected: false },
-        { id: 'pill4', title: 'label 4', selected: false },
-        { id: 'pill5', title: 'label 5', selected: false },
+        { id: 'pill0', title: 'Darrell Johnson'},
+        { id: 'pill1', title: 'Amy Weissman'},
+        { id: 'pill2', title: 'Ana Ortega'},
+        { id: 'pill3', title: 'Jamir Crowley'},
+        { id: 'pill4', title: 'John Goodman'},
+        { id: 'pill5', title: 'Tiffany Tsang'},
+        { id: 'pill6', title: 'Michael Kwon'},
     ];
 
     let inputRef = useRef(null);
@@ -23,6 +25,10 @@ function Pills({ pillBehavior }) {
     // Dropdown -----------------------------------
     // ---------------------------------------------------------------------------------------
     //
+    const handleClickAway = () => {
+        setOpenDropdown(openDropdown = false);
+    };
+
     const toggleMenuSelection = (item) => {
         return () => {
             const index = currentSelected.findIndex(obj => obj.id === item.id);
@@ -73,9 +79,17 @@ function Pills({ pillBehavior }) {
             setCurrentSelected(currentSelected = newData)
             nextFocusPill = currentSelected[index - 1];
             setCurrentPill(currentPill = nextFocusPill);
-            nextFocusEl = nextFocusPill && document.getElementById(nextFocusPill.id);
-            if(nextFocusEl) {
-                nextFocusEl.focus()
+
+            if(currentSelected.length > 0) {
+                if(nextFocusEl && index < 0) {
+                    nextFocusEl = nextFocusPill && document.getElementById(nextFocusPill.id);
+                    nextFocusEl.focus()
+                } else {
+                    nextFocusEl = document.getElementById(currentSelected[0].id);
+                    nextFocusEl.focus()
+                }
+            } else {
+                inputRef.current.focus();
             }
         }
     };
@@ -95,7 +109,14 @@ function Pills({ pillBehavior }) {
                 const newData = [...currentSelected];
                 newData.splice(index, 1);
                 setCurrentSelected(currentSelected = newData)
-                nextFocusPill = currentSelected[index - 1];
+                if(currentSelected.length > 1) {
+                    nextFocusPill = currentSelected[index - 1];
+                } else if(currentSelected.length == 1) {
+                    nextFocusEl = document.getElementById(currentSelected[0].id);
+                    nextFocusEl.focus()
+                } else {
+                    inputRef.current.focus();
+                }
             }
             nextFocusEl = nextFocusPill && document.getElementById(nextFocusPill.id);
             if(nextFocusEl) {
@@ -120,7 +141,7 @@ function Pills({ pillBehavior }) {
                                 <span className="slds-pill">
                                     <span className="slds-pill__label">{pill.title}</span>
                                     <Button
-                                        assistiveText={{ icon: 'Remove' }}
+                                        assistiveText={{ icon: `Remove ${pill.title}` }}
                                         id={pill.id}
                                         iconCategory="utility"
                                         iconName="close"
@@ -174,37 +195,51 @@ function Pills({ pillBehavior }) {
         )
     };
 
-    return (
-        <div>
-            <div className="slds-form-element">
-                <label id="pillInputId" className="slds-form-element__label">Choose Accounts</label>
-                <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
-                    <div 
-                        role="combobox" 
-                        tabIndex="0" 
-                        className="slds-input_faux slds-combobox__input" 
-                        id="combobox-1" 
-                        aria-labelledby="pillInputId"
-                        aria-controls="listbox-1" 
-                        aria-expanded="false" 
-                        aria-haspopup="listbox"
-                        onKeyDown={handleKeyDownButton}
-                        onClick={() => { setOpenDropdown(openDropdown = !openDropdown)}}
-                        ref={inputRef}
-                    >
-                        <span className="slds-truncate">{currentSelected.length > 0 ? `${currentSelected.length} options selected` : "Select an Option…"}</span>
-                    </div>
-                    <InputIcon
-                        assistiveText={{ icon: 'Down' }}
-                        name="down"
-                        size="small"
-                        category="utility"
-                    />
+    const renderPillContainer = () => {
+        if(currentSelected.length > 0) {
+            return (
+                <div>
+                    {pillBehavior == 'listbox' ? renderListboxPills() : renderButtonPills()}
                 </div>
+            )
+        } else {
+            return null;
+        }
+    };
+
+    return (
+        <ClickAwayListener onClickAway={handleClickAway}>
+            <div>
+                <div className="slds-form-element">
+                    <label id="pillInputId" className="slds-form-element__label">Select User(s) for Admin Rights</label>
+                    <div className="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                        <div 
+                            role="combobox" 
+                            tabIndex="0" 
+                            className="slds-input_faux slds-combobox__input" 
+                            id="combobox-1" 
+                            aria-labelledby="pillInputId"
+                            aria-controls="listbox-1" 
+                            aria-expanded="false" 
+                            aria-haspopup="listbox"
+                            onKeyDown={handleKeyDownButton}
+                            onClick={() => { setOpenDropdown(openDropdown = !openDropdown)}}
+                            ref={inputRef}
+                        >
+                            <span className="slds-truncate">{currentSelected.length > 0 ? `${currentSelected.length} Users Selected` : "Select.."}</span>
+                        </div>
+                        <InputIcon
+                            assistiveText={{ icon: 'Down' }}
+                            name="down"
+                            size="small"
+                            category="utility"
+                        />
+                    </div>
+                </div>
+                {openDropdown ? <Menu data={data} linkVariant='option' handleKeyDownMenu={handleKeyDownMenu} handleOnClick={toggleMenuSelection} currentFocusIndex={currentFocusIndex} currentSelected={currentSelected} /> : null}
+                {renderPillContainer()}
             </div>
-            {openDropdown ? <Menu data={data} linkVariant='option' handleKeyDownMenu={handleKeyDownMenu} handleOnClick={toggleMenuSelection} currentFocusIndex={currentFocusIndex} currentSelected={currentSelected} /> : null}
-            {pillBehavior == 'listbox' ? renderListboxPills() : renderButtonPills()}
-        </div>
+        </ClickAwayListener>
     )
 }
 

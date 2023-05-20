@@ -4,6 +4,7 @@
   "homepage": "https://donnieberg.github.io/component-prototypes",
   "private": true,
   "dependencies": {
+    "@mui/base": "^5.0.0-beta.1",
     "@salesforce-ux/design-system": "^2.20.1",
     "@salesforce/design-system-react": "^0.10.54",
     "@testing-library/jest-dom": "^5.16.5",

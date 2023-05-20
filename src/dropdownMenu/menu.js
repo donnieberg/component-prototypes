@@ -30,7 +30,7 @@ function Menu({ data, linkVariant, handleOnClick, handleKeyDownMenu, currentFocu
 
     return (
         <div className={menuClassNames()}>
-            <ul className="" role={linkVariant == 'option' ? "listbox" : "menu"}>
+            <ul aria-multiselectable={linkVariant == 'option' ? "true" : "false"} role={linkVariant == 'option' ? "listbox" : "menu"}>
                 {menuItems}
             </ul>
         </div>
