@@ -11,12 +11,17 @@ const RecordHomePage = () => {
     let [keyboard, setKeyboard] = useState('tab');
     let [initialFocus, setInitialFocus] = useState('close');
     let [pillBehavior, setPillBehavior] = useState('button');
+    let [ariaLive, setAriaLive] = useState('none');
+    let [hasError, setHasError] = useState(false);
+    let [errorStyle, setErrorStyle] = useState('summary');
 
     const settings = [
-        { id: 'tabMarkup', labels: { label: 'Markup for Tabset HTML'}, options: ['h2', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
-        { id: 'overflowBtn', labels: { label: 'Overflow Button keyboard'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard },
-        { id: 'initialFocus', labels: { label: 'Initial Focus'}, options: ['close', 'heading', 'formField'], currentOption: initialFocus, setOptionHandler: setInitialFocus },
-        { id: 'pills', labels: { label: 'Pill Behavior'}, options: ['listbox', 'button'], currentOption: pillBehavior, setOptionHandler: setPillBehavior },
+        { id: 'tabMarkup', labels: { label: 'Tabs - HTML'}, options: ['h2', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
+        { id: 'overflowBtn', labels: { label: 'Tabs - keyboard behavior for More button'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard },
+        { id: 'initialFocus', labels: { label: 'Modal - keyboard Focus'}, options: ['close', 'heading', 'formField'], currentOption: initialFocus, setOptionHandler: setInitialFocus },
+        { id: 'pills', labels: { label: 'Pills - HTML & keyboard Behavior'}, options: ['listbox', 'button'], currentOption: pillBehavior, setOptionHandler: setPillBehavior },
+        { id: 'inputError', labels: { label: 'Form Errors - error message status'}, options: ['none', 'status', 'alert'], currentOption: ariaLive, setOptionHandler: setAriaLive},
+        { id: 'multipleErrors', labels: { label: 'Form Errors - keyboard focus'}, options: ['summary', 'first field'], currentOption: errorStyle, setOptionHandler: setErrorStyle},
     ];
 
     const headerData = {
@@ -29,7 +34,15 @@ const RecordHomePage = () => {
     return (
         <div className="df df-spaceBetween">
             <div className="width-100">
-                <GusHeader headerData={headerData} showModal={true} initialFocus={initialFocus} />
+                <GusHeader 
+                    headerData={headerData} 
+                    showModal={true} 
+                    initialFocus={initialFocus} 
+                    ariaLive={ariaLive}
+                    hasError={hasError}
+                    setHasError={setHasError}
+                    errorStyle={errorStyle}
+                />
                 <section className="df bg-white mhl pam border-rounded">
                     <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} />
                 </section>

@@ -3,8 +3,9 @@ import { useRef } from 'react';
 import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import utils from '../utils.js';
 import { Button, Input } from '@salesforce/design-system-react';
+import MultipleErrors from '../multipleErrors/multipleErrors.js'
 
-function Modal({ initialFocus }) {
+function Modal({ initialFocus, ariaLive, hasError, setHasError, errorStyle }) {
     const modalRef = useRef(null);
     const headingRef = useRef(null);
     const formFieldRef = useRef(null);
@@ -44,27 +45,17 @@ function Modal({ initialFocus }) {
                         variant="icon"
                     />
                 </div>
-                    <div className="slds-modal__header">
-                        <h1 tabIndex="-1" ref={headingRef}>Add New User</h1>
-                    </div>
-                    <div className="pam slds-modal__content">
-                        <Input inputRef={formFieldRef} id="firstName" label="First Name" placeholder="Enter in text" />
-                        <Input id="lastName" label="Last Name" placeholder="Enter in text" />
-                        <Input id="email" label="Email" placeholder="Enter in text" type="email" />
-                        <Input id="phone" label="Phone" placeholder="Enter in text" type="tel" />
-                    </div>
-                <div className="slds-modal__footer">
-                    <Button 
-                        label="Cancel"
-                        onClick={handleBtnClick}
-                        variant="neutral"
-                    />
-                    <Button 
-                        label="Save"
-                        onClick={handleBtnClick}
-                        variant="brand"
-                    />
+                <div className="slds-modal__header">
+                    <h1 tabIndex="-1" ref={headingRef}>Add New User</h1>
                 </div>
+                <MultipleErrors 
+                    handleCancel={handleBtnClick}
+                    inputRef={formFieldRef}
+                    errorStyle={errorStyle} 
+                    ariaLive={ariaLive} 
+                    hasError={hasError} 
+                    setHasError={setHasError} 
+                />
             </dialog>
         </div>
     )

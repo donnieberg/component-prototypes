@@ -12,10 +12,13 @@ function App() {
         <HashRouter>
             <Routes>
                 <Route path="/" element={<LayoutPage />}>
+                    {/* 
                     <Route index element={<HomePage />} />
                     <Route path="recordHome" element={<RecordHomePage />} />
                     <Route path="errorMessaging" element={<ErrorMessaging />} />
                     <Route path="multipleErrors" element={<MultipleErrorsPage />} />
+                    */}
+                    <Route index element={<RecordHomePage />} />
                 </Route>
             </Routes>
         </HashRouter>

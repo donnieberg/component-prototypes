@@ -1,7 +1,7 @@
 import { Button, Input, InputIcon } from '@salesforce/design-system-react';
 import Modal from '../../modal/modal.js'
 
-const GusHeader = ({ showModal, initialFocus, headerData }) => {
+const GusHeader = ({ showModal, initialFocus, headerData, ariaLive, hasError, setHasError, errorStyle }) => {
     const navItems = [
         { label: 'Home', },
         { label: 'Chatter', },
@@ -61,7 +61,7 @@ const GusHeader = ({ showModal, initialFocus, headerData }) => {
                         <p className="mhm dib">{headerData.subtitle1}</p>
                         <p className="dib">{headerData.subtitle2}</p>
                     </div>
-                    {showModal ? <Modal initialFocus={initialFocus} /> : null}
+                    {showModal ? <Modal initialFocus={initialFocus} ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} errorStyle={errorStyle} /> : null}
                 </div>
             </div>
         </div>
