@@ -70,6 +70,7 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
         newData.splice(3, 0, element);
         setCurrentData(currentData = newData);
         setCurrentTab(currentTab = currentData[3]);
+        setOpenDropdown(openDropdown = false);
 
         setTimeout(() => {
             const nextFocusEl = document.getElementById(item.id);

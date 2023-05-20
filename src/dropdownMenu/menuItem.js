@@ -18,6 +18,7 @@ function MenuItem(props) {
                 <Link 
                     to={`/${item.link}`} 
                     ref={ref} 
+                    onKeyDown={handleKeyDown(item)}
                 >
                     {item.title}
                 </Link>
@@ -31,6 +32,7 @@ function MenuItem(props) {
                     className={classNames('slds-media slds-listbox__option slds-listbox__option_plain slds-media_small', {
                         'bg-hover': currentFocusIndex == index
                     })}
+                    aria-checked={renderCheckMark ? 'true' : 'false'}
                     onKeyDown={handleKeyDown(item)}
                     onClick={handleOnClick(item)}
                 >
