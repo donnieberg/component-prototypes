@@ -140,7 +140,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
         setNumberOfErrors(errorCount);
         setDisplayErrors(errorsFound);
         if(errorCount > 0) {
-            if(errorStyle === 'Link') {
+            if(errorStyle === 'summary') {
                 errorRef.current.focus();
             }
             else elementRef.current.focus();
@@ -150,7 +150,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
     const renderForm = () => {
         return (
             <form onSubmit={handleSubmit} className="pam slds-modal__content">
-                <div ref={errorRef} tabIndex="-1" role={(errorStyle !== 'Link') ? "status" : null} >
+                <div ref={errorRef} tabIndex="-1" role={(errorStyle !== 'summary') ? "status" : null} >
                     {displayErrors ? renderErrors() : null}
                 </div>
                 {state.map(element => {      
@@ -202,6 +202,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
     const renderLinkError = (element) => {
         return (
             <a href="#"
+                className="db"
                 id={'page-error-' + element.inputId}
                 key={'page-error-' + element.inputId}
                 onClick={focusInput()}
@@ -213,7 +214,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
 
     const renderPlainError = (element) => {
         return (
-            <span key={'span-error-' + element.inputId}>
+            <span className="db" key={'span-error-' + element.inputId}>
                 {'Error: ' + element.label + ' is a required field.'}
                 <br/>
             </span>
@@ -228,7 +229,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                     if(!element.hasError) {
                         return;
                     }
-                    return ((errorStyle === 'Link') ? renderLinkError(element) : renderPlainError(element));
+                    return ((errorStyle === 'summary') ? renderLinkError(element) : renderPlainError(element));
                 })}
             </div>
         );

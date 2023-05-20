@@ -13,7 +13,7 @@ const RecordHomePage = () => {
     let [pillBehavior, setPillBehavior] = useState('button');
     let [ariaLive, setAriaLive] = useState('none');
     let [hasError, setHasError] = useState(false);
-    let [errorStyle, setErrorStyle] = useState('Link');
+    let [errorStyle, setErrorStyle] = useState('summary');
 
     const settings = [
         { id: 'tabMarkup', labels: { label: 'Tabs - HTML'}, options: ['h2', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },

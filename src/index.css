@@ -84,6 +84,7 @@ dialog::backdrop {
 .df-center { justify-content: center; }
 
 .dib { display: inline-block; }
+.db { display: block; }
 
 .width-25 { width: 25%; }
 .width-75 { width: 75%; }

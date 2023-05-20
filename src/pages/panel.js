@@ -61,8 +61,8 @@ const Panel = ({ settings }) => {
                     variant="icon"
                 />
             </div>
+            {/* 
             <h2>Current Page: {determineCurrentPage()}</h2>
-
             <DropdownMenu
                 label="Pages"
                 className="slds-dropdown"
@@ -72,6 +72,7 @@ const Panel = ({ settings }) => {
                 setOpenDropdown={setOpenDropdown}
             />
 
+            */}
             {settings && settings.map((setting) => {
                 return (
                     <div key={setting.id} className="pvm">
