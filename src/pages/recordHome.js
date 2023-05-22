@@ -1,5 +1,6 @@
 import Tabset from '../tabs/tabset.js'
 import Panel from './panel.js'
+import dummyData from '../dummyData/data.js'
 import GusHeader from './templates/header.js'
 import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
@@ -16,30 +17,23 @@ const RecordHomePage = () => {
     let [errorStyle, setErrorStyle] = useState('summary');
 
     const settings = [
-        { id: 'divider', labels: { label: 'Tabs'}},
+        { id: 'divider-1', type: 'divider', labels: { label: 'Tabs'}},
         { id: 'tabMarkup', labels: { label: 'HTML'}, options: ['h2', 'landmark'], currentOption: markup, setOptionHandler: setMarkup },
         { id: 'overflowBtn', labels: { label: 'More button'}, options: ['tab', 'arrow'], currentOption: keyboard, setOptionHandler: setKeyboard },
-        { id: 'divider', labels: { label: 'Modal'}},
+        { id: 'divider-2', type: 'divider', labels: { label: 'Modal'}},
         { id: 'initialFocus', labels: { label: 'Focus'}, options: ['close', 'heading', 'formField'], currentOption: initialFocus, setOptionHandler: setInitialFocus },
-        { id: 'divider', labels: { label: 'Pills'}},
+        { id: 'divider-3', type: 'divider', labels: { label: 'Pills'}},
         { id: 'pills', labels: { label: 'HTML & keyboard Behavior'}, options: ['listbox', 'button'], currentOption: pillBehavior, setOptionHandler: setPillBehavior },
-        { id: 'divider', labels: { label: 'Input Errors'}},
+        { id: 'divider-4', type: 'divider', labels: { label: 'Input Errors'}},
         { id: 'inputError', labels: { label: 'Form Errors - error message status'}, options: ['none', 'status', 'alert'], currentOption: ariaLive, setOptionHandler: setAriaLive},
         { id: 'multipleErrors', labels: { label: 'Form Errors - keyboard focus'}, options: ['summary', 'first field'], currentOption: errorStyle, setOptionHandler: setErrorStyle},
     ];
-
-    const headerData = {
-        label: 'Roe Construction',
-        imageUrl: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.9qA5rhWrP9BLNjO_I2eikwD5D6%26pid%3DApi&f=1&ipt=726272091737fdada1fb8539e90db340d015b588c45fe9a4010c17da96fc030d&ipo=images',
-        subtitle1: 'B2B Company',
-        subtitle2: "5,000-10,000 employees",
-    };
 
     return (
         <div className="df df-spaceBetween">
             <div className="width-100">
                 <GusHeader 
-                    headerData={headerData} 
+                    headerData={dummyData.companyHeader} 
                     showModal={true} 
                     initialFocus={initialFocus} 
                     ariaLive={ariaLive}

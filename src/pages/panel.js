@@ -1,19 +1,10 @@
 import { useOutletContext } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { Button, Checkbox, RadioButtonGroup, Radio } from '@salesforce/design-system-react';
-import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
 
 const Panel = ({ settings }) => {
-    const pageLinks = [
-        { id: 'page1', link: '', title: 'Home' },
-        { id: 'page2', link: 'recordHome', title: 'Record Home' },
-        { id: 'page4', link: 'multipleErrors', title: 'multipleErrors' },
-        { id: 'page5', link: 'errorMessaging', title: 'errorMessaging' },
-    ];
-
     const [panelOpen, handleSettingsClick] = useOutletContext();
-    let [openDropdown, setOpenDropdown] = useState(false);
 
     useEffect(() => {
         document.getElementById('buttonRef').focus();
@@ -35,18 +26,6 @@ const Panel = ({ settings }) => {
         }
     };
 
-    const determineCurrentPage = () => {
-        if(window.location.hash == '#/recordHome') {
-            return 'Record Home';
-        } else if(window.location.hash == '#/multipleErrors') {
-            return 'Multiple Errors';
-        } else if(window.location.hash == '#/errorMessaging') {
-            return 'Error Messaging';
-        } else {
-            return 'Home'
-        }
-    };
-
     return (
         <aside id="panel"className="pam border-l width-25">
             <div className="df df-end">
@@ -61,21 +40,9 @@ const Panel = ({ settings }) => {
                     variant="icon"
                 />
             </div>
-            {/* 
-            <h2>Current Page: {determineCurrentPage()}</h2>
-            <DropdownMenu
-                label="Pages"
-                className="slds-dropdown"
-                data={pageLinks}
-                linkVariant="reactRouter"
-                openDropdown={openDropdown}
-                setOpenDropdown={setOpenDropdown}
-            />
-
-            */}
             {settings && settings.map((setting) => {
-                if(setting.id == 'divider') {
-                    return <h3 className="pts mtl slds-text-heading_small border-t">{setting.labels.label}</h3>
+                if(setting.type == 'divider') {
+                    return <h3 key={setting.id} className="pts mtl slds-text-heading_small border-t">{setting.labels.label}</h3>
                 } else {
                 return (
                     <div key={setting.id} className="ptm">

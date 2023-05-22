@@ -1,14 +1,9 @@
 import { Input, Tooltip } from '@salesforce/design-system-react';
 import Modal from '../../modal/modal.js'
+import dummyData from '../../dummyData/data.js'
 
 const Details = ({ initialFocus }) => {
-    const data = [
-        { id: 'details-1', label: 'Company Name', value: 'Roe Construction', },
-        { id: 'details-2', label: 'Account Executive', value: 'Darnell Johnson', },
-        { id: 'details-3', label: 'Address', value: '135 Main Street, Chicago, IL 60185', },
-        { id: 'details-4', label: 'Phone', value: '630-356-8495', },
-        { id: 'details-5', label: 'email', value: 'test@roeConstruction.com', },
-    ];
+    const data = dummyData.companyDetails.slice(3);
 
     const renderData = () => {
         return data.map(item  => {
@@ -27,7 +22,7 @@ const Details = ({ initialFocus }) => {
 
     return (
         <div>
-            <Modal details={{ heading: 'Edit Company Details', subtitle: 'Company Details will be reflected for all users and accounts. To learn more, ', btnLabel: 'Edit Details', btnIcon: 'edit', initialFocus: initialFocus}} />
+            <Modal details={{ heading: 'Edit Company Details', subtitle: 'Company Details will be reflected for all users and accounts.', btnLabel: 'Edit Details', btnIcon: 'edit', initialFocus: initialFocus}} />
             {renderData()}
         </div>
     )

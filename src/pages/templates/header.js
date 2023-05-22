@@ -1,14 +1,8 @@
-import { Button, Input, InputIcon, Tooltip } from '@salesforce/design-system-react';
+import { Button, Input, InputIcon } from '@salesforce/design-system-react';
 import Modal from '../../modal/modal.js'
+import dummyData from '../../dummyData/data.js'
 
 const GusHeader = ({ showModal, initialFocus, headerData, ariaLive, hasError, setHasError, errorStyle }) => {
-    const navItems = [
-        { label: 'Home', },
-        { label: 'Chatter', },
-        { label: 'Accounts', },
-        { label: 'Opportunities', },
-        { label: 'Users', },
-    ];
     return (
         <div>
             <header className="phm bg-white df df-center">
@@ -42,7 +36,7 @@ const GusHeader = ({ showModal, initialFocus, headerData, ariaLive, hasError, se
                     variant="icon"
                 />
                 <ul className="dib">
-                    {navItems.map(item => {
+                    {dummyData.navItems.map(item => {
                         return (
                             <li key={item.label} className="phm dib">
                                 <a href="#">

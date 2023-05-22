@@ -2,25 +2,16 @@ import { useState, useRef } from 'react';
 import { Button, Input, InputIcon, Icon } from '@salesforce/design-system-react';
 import utils from '../utils.js'
 import Menu from '../dropdownMenu/menu.js';
+import dummyData from '../dummyData/data.js';
 import classnames from "classnames";
 import { ClickAwayListener } from '@mui/base';
 
 function Pills({ pillBehavior }) {
-    const data = [
-        { id: 'pill0', title: 'Darrell Johnson'},
-        { id: 'pill1', title: 'Amy Weissman'},
-        { id: 'pill2', title: 'Ana Ortega'},
-        { id: 'pill3', title: 'Jamir Crowley'},
-        { id: 'pill4', title: 'John Goodman'},
-        { id: 'pill5', title: 'Tiffany Tsang'},
-        { id: 'pill6', title: 'Michael Kwon'},
-    ];
-
     let inputRef = useRef(null);
     let [currentFocusIndex, setCurrentFocusIndex] = useState(0);
     let [openDropdown, setOpenDropdown] = useState(false);
-    let [currentPill, setCurrentPill] = useState(data[0]);
-    let [currentSelected, setCurrentSelected] = useState(data.slice(0, 3));
+    let [currentPill, setCurrentPill] = useState(dummyData.pills[0]);
+    let [currentSelected, setCurrentSelected] = useState(dummyData.pills.slice(0, 3));
 
     // Dropdown -----------------------------------
     // ---------------------------------------------------------------------------------------
@@ -54,7 +45,7 @@ function Pills({ pillBehavior }) {
 
     const handleKeyDownMenu = (item) => {
         return (e) => {
-            if(e.keyCode == utils.keys.down && currentFocusIndex < data.length - 1) {
+            if(e.keyCode == utils.keys.down && currentFocusIndex < dummyData.pills.length - 1) {
                 setCurrentFocusIndex(currentFocusIndex + 1)
             } else if(e.keyCode == utils.keys.up && currentFocusIndex > 0) {
                 setCurrentFocusIndex(currentFocusIndex - 1)
@@ -236,7 +227,7 @@ function Pills({ pillBehavior }) {
                         />
                     </div>
                 </div>
-                {openDropdown ? <Menu data={data} linkVariant='option' handleKeyDownMenu={handleKeyDownMenu} handleOnClick={toggleMenuSelection} currentFocusIndex={currentFocusIndex} currentSelected={currentSelected} /> : null}
+                {openDropdown ? <Menu data={dummyData.pills} linkVariant='option' handleKeyDownMenu={handleKeyDownMenu} handleOnClick={toggleMenuSelection} currentFocusIndex={currentFocusIndex} currentSelected={currentSelected} /> : null}
                 {renderPillContainer()}
             </div>
         </ClickAwayListener>

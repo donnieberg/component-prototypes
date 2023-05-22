@@ -50,7 +50,6 @@ function Modal({ details, ariaLive, hasError, setHasError, errorStyle }) {
                 <div className="slds-modal__header">
                     <h1 tabIndex="-1" ref={headingRef} className="slds-text-heading_medium">{details.heading}</h1>
                     <p className="dib mrxs slds-text-title width-85">{details.subtitle}</p>
-                    {details.tooltip}
                 </div>
                 {details.example == 'user' 
                     ? <MultipleErrors 
