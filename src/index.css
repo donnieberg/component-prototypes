@@ -81,11 +81,14 @@ dialog {
 
 .pvm { padding-top: 1rem; padding-bottom: 1rem; }
 .pvs { padding-top: .5rem; padding-bottom: .5rem; }
+.pts { padding-top: .5rem; }
+.ptm { padding-top: 1rem; }
 
 .mam { margin: 1rem; }
 .mhm { margin-left: 1rem; margin-right: 1rem; }
 .mhl { margin-left: 2rem; margin-right: 2rem; }
 .mvm { margin-top: 1rem; margin-bottom: 1rem; }
+.mtl { margin-top: 1.5rem; }
 .mrxs { margin-right: .25rem; }
 .mr-auto { margin-right: auto; }
 .ml-auto { margin-left: auto; }
@@ -117,6 +120,7 @@ dialog {
 .bg-white { background-color: white; }
 .bg-hover { background-color: #f3f3f3; }
 .border-l { border-left: 1px solid black; }
+.border-t { border-top: 1px solid black; }
 
 .border-rounded { border-radius: .5rem; }
 .circle { border-radius: 50%; }

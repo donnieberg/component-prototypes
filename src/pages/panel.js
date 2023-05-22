@@ -74,8 +74,11 @@ const Panel = ({ settings }) => {
 
             */}
             {settings && settings.map((setting) => {
+                if(setting.id == 'divider') {
+                    return <h3 className="pts mtl slds-text-heading_small border-t">{setting.labels.label}</h3>
+                } else {
                 return (
-                    <div key={setting.id} className="pvm">
+                    <div key={setting.id} className="ptm">
                         <RadioButtonGroup
                             labels={setting.labels}
                             onChange={handleOnChange(setting)}
@@ -93,6 +96,7 @@ const Panel = ({ settings }) => {
                         </RadioButtonGroup>
                     </div>
                 )
+                }
             })}
         </aside>
     )

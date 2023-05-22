@@ -4,6 +4,8 @@ import DropdownMenu from '../dropdownMenu/dropdownMenu.js';
 import utils from '../utils.js'
 import Details from './content/details.js'
 import Pills from '../pills/pills.js'
+import DataTableExample from '../pages/templates/dataTableExample.js'
+import dummyData from '../dummyData/data.js'
 
 function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
     const tab0_ref = useRef(null);
@@ -16,13 +18,13 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
     const overflowBtnRef = useRef(null);
 
     const tabData = [
-        { index: 0, id: '0_tab', ref: tab0_ref, title: 'Details', content: <Details />},
-        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: <Pills /> },
-        { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: 'content for Accounts' },
-        { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: 'content for opportunities' },
-        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: 'content for Cases' },
-        { index: 5, id: '5_tab', ref: tab5_ref, title: 'Reports', content: 'content for reports' },
-        { index: 6, id: '6_tab', ref: tab6_ref, title: 'Favorites', content: 'content for Favorites' },
+        { index: 0, id: '0_tab', ref: tab0_ref, title: 'Company Details', content: <Details />},
+        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Admins', content: <Pills /> },
+        { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: <DataTableExample data={dummyData.accounts}/> },
+        { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: <DataTableExample data={dummyData.accounts}/>} ,
+        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: <DataTableExample data={dummyData.accounts}/> },
+        { index: 5, id: '5_tab', ref: tab5_ref, title: 'Reports', content: <DataTableExample data={dummyData.accounts}/>},
+        { index: 6, id: '6_tab', ref: tab6_ref, title: 'Favorites', content:  <DataTableExample data={dummyData.accounts}/>},
     ];
 
     let [currentTab, setCurrentTab] = useState(tabData[0]);

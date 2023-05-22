@@ -26,7 +26,7 @@ function EditCompanyDetails({handleCancel, inputRef}) {
                     id="details-4"
                     inputRef={inputRef}
                     label="Company Name"
-                    value="Test Company"
+                    value="Roe Construction"
                 />
                 <Input
                     id="details-5"
@@ -46,7 +46,7 @@ function EditCompanyDetails({handleCancel, inputRef}) {
                 <Input
                     id="details-8"
                     label="Email"
-                    value="test@testCompany.com"
+                    value="test@roeConstruction.com"
                 />
             </div>
             <div className="slds-modal__footer">
