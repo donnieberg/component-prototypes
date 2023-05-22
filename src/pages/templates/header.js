@@ -1,4 +1,4 @@
-import { Button, Input, InputIcon } from '@salesforce/design-system-react';
+import { Button, Input, InputIcon, Tooltip } from '@salesforce/design-system-react';
 import Modal from '../../modal/modal.js'
 
 const GusHeader = ({ showModal, initialFocus, headerData, ariaLive, hasError, setHasError, errorStyle }) => {
@@ -61,7 +61,7 @@ const GusHeader = ({ showModal, initialFocus, headerData, ariaLive, hasError, se
                         <p className="mhm dib">{headerData.subtitle1}</p>
                         <p className="dib">{headerData.subtitle2}</p>
                     </div>
-                    {showModal ? <Modal initialFocus={initialFocus} ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} errorStyle={errorStyle} /> : null}
+                    {showModal ? <Modal details={{ heading: "Add New User", subtitle: "IMPORTANT: New users will be sent an invitation to join your org. They must approve it within 48 hours. All features for this user will be disabled until then.", example:"user", btnLabel: "New User", btnIcon: "add", initialFocus: initialFocus }} ariaLive={ariaLive} hasError={hasError} setHasError={setHasError} errorStyle={errorStyle} /> : null}
                 </div>
             </div>
         </div>

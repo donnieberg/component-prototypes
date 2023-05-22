@@ -1,5 +1,7 @@
-import { Input } from '@salesforce/design-system-react';
-const Details = () => {
+import { Input, Tooltip } from '@salesforce/design-system-react';
+import Modal from '../../modal/modal.js'
+
+const Details = ({ initialFocus }) => {
     const data = [
         { id: 'details-1', label: 'Company Name', value: 'Test Company', },
         { id: 'details-2', label: 'Account Executive', value: 'Darnell Johnson', },
@@ -25,6 +27,7 @@ const Details = () => {
 
     return (
         <div>
+            <Modal details={{ heading: 'Edit Company Details', subtitle: 'Company Details will be reflected for all users and accounts. To learn more, ', btnLabel: 'Edit Details', btnIcon: 'edit', initialFocus: initialFocus}} />
             {renderData()}
         </div>
     )
