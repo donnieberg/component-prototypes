@@ -4,8 +4,9 @@ import { Outlet, BrowserRouter, Route, Link } from "react-router-dom";
 import utils from '../utils.js';
 import { Button, Input } from '@salesforce/design-system-react';
 import MultipleErrors from '../multipleErrors/multipleErrors.js'
+import EditCompanyDetails from './editDetails.js';
 
-function Modal({ initialFocus, ariaLive, hasError, setHasError, errorStyle }) {
+function Modal({ details, ariaLive, hasError, setHasError, errorStyle }) {
     const modalRef = useRef(null);
     const headingRef = useRef(null);
     const formFieldRef = useRef(null);
@@ -16,20 +17,21 @@ function Modal({ initialFocus, ariaLive, hasError, setHasError, errorStyle }) {
             modal.close();
         } else {
             modal.showModal();
-            if(initialFocus == 'heading') headingRef.current.focus();
-            if(initialFocus == 'formField') formFieldRef.current.focus();
+            if(details.initialFocus == 'heading') headingRef.current.focus();
+            if(details.initialFocus == 'formField') formFieldRef.current.focus();
         }
     };
 
     return (
         <div className="ml-auto">
             <Button 
-                label="New User" 
+                label={details.btnLabel}
+                className={details.btnCSS}
                 id="toggleModal" 
                 onClick={handleBtnClick} 
                 variant="neutral" 
                 iconCategory="utility"
-                iconName="add"
+                iconName={details.btnIcon}
                 iconPosition="left"
             />
             <dialog id="dialog" ref={modalRef}>
@@ -46,16 +48,23 @@ function Modal({ initialFocus, ariaLive, hasError, setHasError, errorStyle }) {
                     />
                 </div>
                 <div className="slds-modal__header">
-                    <h1 tabIndex="-1" ref={headingRef}>Add New User</h1>
+                    <h1 tabIndex="-1" ref={headingRef} className="slds-text-heading_medium">{details.heading}</h1>
+                    <p className="dib mrxs slds-text-title width-85">{details.subtitle}</p>
+                    {details.tooltip}
                 </div>
-                <MultipleErrors 
-                    handleCancel={handleBtnClick}
-                    inputRef={formFieldRef}
-                    errorStyle={errorStyle} 
-                    ariaLive={ariaLive} 
-                    hasError={hasError} 
-                    setHasError={setHasError} 
-                />
+                {details.example == 'user' 
+                    ? <MultipleErrors 
+                        handleCancel={handleBtnClick}
+                        inputRef={formFieldRef}
+                        errorStyle={errorStyle} 
+                        ariaLive={ariaLive} 
+                        hasError={hasError} 
+                        setHasError={setHasError} 
+                    /> : <EditCompanyDetails 
+                        handleCancel={handleBtnClick}
+                        inputRef={formFieldRef}
+                    />
+                }
             </dialog>
         </div>
     )

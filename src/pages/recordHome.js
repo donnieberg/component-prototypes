@@ -44,7 +44,7 @@ const RecordHomePage = () => {
                     errorStyle={errorStyle}
                 />
                 <section className="df bg-white mhl pam border-rounded">
-                    <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} />
+                    <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} initialFocus={initialFocus} />
                 </section>
             </div>
             {panelOpen ? <Panel settings={settings} /> : null }

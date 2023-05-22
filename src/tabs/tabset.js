@@ -5,7 +5,7 @@ import utils from '../utils.js'
 import Details from './content/details.js'
 import Pills from '../pills/pills.js'
 
-function Tabs({ html, overflowBtn, pillBehavior }) {
+function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
     const tab0_ref = useRef(null);
     const tab1_ref = useRef(null);
     const tab2_ref = useRef(null);
@@ -17,7 +17,7 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
 
     const tabData = [
         { index: 0, id: '0_tab', ref: tab0_ref, title: 'Details', content: <Details />},
-        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: <Pills pillBehavior={pillBehavior} /> },
+        { index: 1, id: '1_tab', ref: tab1_ref, title: 'Users', content: <Pills /> },
         { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: 'content for Accounts' },
         { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: 'content for opportunities' },
         { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: 'content for Cases' },
@@ -105,6 +105,16 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
         )
     })
 
+    const renderDynamicContent = (data) => {
+        if(data.id == '0_tab') {
+            return <Details initialFocus={initialFocus} /> 
+        } else if(data.id == '1_tab') {
+            return <Pills pillBehavior={pillBehavior} /> 
+        } else {
+            return data.content
+        }
+    };
+
     const tabContent = currentData.slice(0, 4).map(data => {
         return (
             <div key={data.id} 
@@ -117,7 +127,7 @@ function Tabs({ html, overflowBtn, pillBehavior }) {
                 role="tabpanel" 
                 aria-labelledby={data.id}
             >
-                {data.id == '1_tab' ? <Pills pillBehavior={pillBehavior} /> : data.content}
+                {renderDynamicContent(data)}
             </div>
         )
     });
