@@ -1,4 +1,5 @@
 import Tabset from '../tabs/tabset.js'
+import News from './templates/news.js'
 import Panel from './panel.js'
 import dummyData from '../dummyData/data.js'
 import GusHeader from './templates/header.js'
@@ -41,8 +42,9 @@ const RecordHomePage = () => {
                     setHasError={setHasError}
                     errorStyle={errorStyle}
                 />
-                <section className="df bg-white mhl pam border-rounded">
+                <section className="df df-spaceBetween">
                     <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} initialFocus={initialFocus} />
+                    <News />
                 </section>
             </div>
             {panelOpen ? <Panel settings={settings} /> : null }

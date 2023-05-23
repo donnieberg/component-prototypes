@@ -1,6 +1,7 @@
 const accounts = [
     {
         id: '8IKZHZZV80',
+        type: 'accounts',
         opportunityName: 'Cloudhub',
         accountName: 'Cloudhub',
         closeDate: '4/14/2015',
@@ -11,6 +12,7 @@ const accounts = [
     },
     {
         id: '5GJOOOPWU7',
+        type: 'accounts',
         opportunityName: 'Cloudhub + Anypoint Connectors',
         accountName: 'Cloudhub',
         closeDate: '4/14/2015',
@@ -21,6 +23,7 @@ const accounts = [
     },
     {
         id: '8IKZHZZV81',
+        type: 'accounts',
         opportunityName: 'Cloudhub',
         accountName: 'Cloudhub',
         closeDate: '4/14/2015',
@@ -32,6 +35,50 @@ const accounts = [
 ];
 
 const cases = [
+    {
+        id: '8IKZHZZV80',
+        type: 'cases',
+        opportunityName: 'High Priority',
+        accountName: 'Top Customer',
+        closeDate: '4/14/2023',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'cases',
+        opportunityName: 'High Priority',
+        accountName: 'Amazon',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '8IKZHZZV81',
+        type: 'cases',
+        opportunityName: 'Medium Priority',
+        accountName: 'Buzzfeed',
+        closeDate: '5/24/2023',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'cases',
+        opportunityName: 'High Priority',
+        accountName: 'Amazon',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
 ];
 
 const companyDetails = [
@@ -53,6 +100,28 @@ const companyHeader = {
 };
 
 const favorites = [
+    {
+        id: '5GJOOOPWU7',
+        type: 'favorites',
+        opportunityName: 'Favorite 1',
+        accountName: 'Amazon',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'favorites',
+        opportunityName: 'Favorite 2',
+        accountName: 'Amazon',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
 ];
 
 const navItems = [
@@ -63,7 +132,58 @@ const navItems = [
     { label: 'Users', },
 ];
 
+const news = [
+    { id: 'news-1', title: 'Roe Construction (RCLT) up 2% since Q2', url: 'https://www.wsj.com/', source: 'Wall Street Journal', timestamp: 'Monday, May 22nd 2:33pm EST', content: 'Excellent news for the end of Q2 for local business, Roe Construction. They surprised Wall Street with higher than expected earnings, and grew their revenue by 10%...' },
+    { id: 'news-2', title: 'Higher than expected Q2 Returns for Roe Construction', url: 'https://www.nytimes.com/', source: 'New York Times', timestamp: 'Tuesday, May 23rd 9:00am EST', content: 'Invesors were super happy this morning with better than expected Q2 results from Roe Construction. Things are turning around for the Chicago based...' },
+    { id: 'news-3', title: 'Roe Construction spends 5M on Commercial', url: 'https://www.buzzfeed.com/', source: 'Buzzfeed', timestamp: 'Tuesday, May 23rd 11:03am EST', content: 'The Behive is swarming with this news. Roe Construction hires Beyonce and Jay-Z for biggest commercial yet...' },
+    { id: 'news-4', title: 'Top 5 Undervalued Stocks to Buy Now', url: 'https://www.wsj.com/', source: 'Wall Street Journal', timestamp: 'Wednesday, May 24th 8:00am EST', content: 'Markets are up overall but a handful of stocks have surpassed their peers. We have the latest on which stocks...' },
+];
+
 const opptys = [
+    {
+        id: '5GJOOOPWU7',
+        type: 'opptys',
+        opportunityName: 'Databricks',
+        accountName: 'Amazon',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'opptys',
+        opportunityName: 'HMI stocks',
+        accountName: 'Microsoft',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'opptys',
+        opportunityName: 'Google',
+        accountName: 'Campus One',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'opptys',
+        opportunityName: 'Netflix',
+        accountName: 'Lower campus Two',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
 ];
 
 const pills = [
@@ -77,6 +197,39 @@ const pills = [
 ];
 
 const reports = [
+    {
+        id: '5GJOOOPWU7',
+        type: 'reports',
+        opportunityName: 'Top 100 Salespeople in NW region',
+        accountName: 'Roe Construction',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'reports',
+        opportunityName: 'Top Opporunities for small mid market',
+        accountName: 'Campus One',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
+    {
+        id: '5GJOOOPWU7',
+        type: 'reports',
+        opportunityName: 'Top 50 cases to cause red alert',
+        accountName: 'Lower campus Two',
+        closeDate: '6/7/23',
+        stage: 'Prospecting',
+        confidence: '20%',
+        amount: '$25k',
+        contact: 'jrogers@cloudhub.com',
+    },
 ];
 
 
@@ -88,6 +241,7 @@ export default {
     companyHeader, 
     favorites, 
     navItems,
+    news,
     opptys, 
     pills,
     reports, 
