@@ -6,7 +6,7 @@ import { Button, Input } from '@salesforce/design-system-react';
 import MultipleErrors from '../multipleErrors/multipleErrors.js'
 import EditCompanyDetails from './editDetails.js';
 
-function Modal({ details, ariaLive, hasError, setHasError, errorStyle }) {
+function Modal({ details, ariaLive, hasError, setHasError, errorStyle, className }) {
     const modalRef = useRef(null);
     const headingRef = useRef(null);
     const formFieldRef = useRef(null);
@@ -23,7 +23,7 @@ function Modal({ details, ariaLive, hasError, setHasError, errorStyle }) {
     };
 
     return (
-        <div className="ml-auto">
+        <div className={`ml-auto ${className}`}>
             <Button 
                 label={details.btnLabel}
                 className={details.btnCSS}
