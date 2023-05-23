@@ -25,7 +25,7 @@ const Details = ({ initialFocus }) => {
 
     return (
         <div className="df df-column">
-            <Modal details={{ heading: 'Edit Company Details', subtitle: 'Company Details will be reflected for all users and accounts.', btnLabel: 'Edit Details', btnIcon: 'edit', initialFocus: initialFocus}} />
+            <Modal className="z-index-1" details={{ heading: 'Edit Company Details', subtitle: 'Company Details will be reflected for all users and accounts.', btnLabel: 'Edit Details', btnIcon: 'edit', initialFocus: initialFocus}} />
             {renderData()}
         </div>
     )
