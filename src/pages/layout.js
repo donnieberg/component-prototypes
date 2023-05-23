@@ -14,7 +14,7 @@ const LayoutPage = ({ currentUrl }) => {
 
     return (
         <div>
-            <nav className="bg-white pvs df df-end">
+            <div className="bg-white pvs df df-end">
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
                     className="mvs mhm"
@@ -26,7 +26,7 @@ const LayoutPage = ({ currentUrl }) => {
                     onClick={handleSettingsClick}
                     variant="icon"
                 />
-            </nav>
+            </div>
             <main>
                 <Outlet context={[asideOpen, handleSettingsClick, currentUrl]} />
             </main>
