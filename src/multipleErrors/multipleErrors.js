@@ -72,22 +72,30 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
 
     const handleErrorOnBlur = (element) => {
         return (e) => {
-            if(element.isRequired) {
+          let elementHasError = false;  
+          if(element.isRequired) {
                 let formInput = element.inputRef.current;
                 if(e.target.value.length < 1) {
-                    formInput.classList.add("slds-has-error");
+                  elementHasError = true;  
+                  formInput.classList.add("slds-has-error");
                     e.target.setAttribute("aria-invalid", true);
-                    const newState = state.map((element) => {
-                        if('input-' + element.inputId === e.target.id) {
-                            return {
-                                ...element,
-                                hasError: true
-                            }
-                        } else return element;
-                    });
-                    setState(newState);
+                    e.target.setAttribute("aria-describedby", "input-error-" + element.inputId);
                 }  // End if the input is empty
+                else {
+                  elementHasError = false;
+                  e.target.removeAttribute("aria-describedby");
+                  e.target.removeAttribute("aria-invalid");
+                }  // End else
             }
+            const newState = state.map((element) => {
+              if('input-' + element.inputId === e.target.id) {
+                  return {
+                      ...element,
+                      hasError: elementHasError
+                  }
+              } else return element;
+          });
+          setState(newState);
         }
     };  // End handleOnBlur event handler
 
@@ -177,15 +185,12 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                                     onBlur={handleErrorOnBlur(element)}
                                 />
                             </div>
-                            <div className="slds-form-element__help" id="input-error-1" role={renderRole()}>{renderErrorText(element)}</div>
+                            <div className="slds-form-element__help" id={"input-error-" + element.inputId} role={renderRole()}>{renderErrorText(element)}</div>
                         </div>
                     )})}
             </form>
         )
     };  // End renderForm function
-
-    const setFocus = () => {
-    };
 
     const focusInput = (e) => {
         return (e) => {
