@@ -77,6 +77,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                 if(e.target.value.length < 1) {
                     formInput.classList.add("slds-has-error");
                     e.target.setAttribute("aria-invalid", true);
+                    e.target.setAttribute("aria-describedby", "input-error-" + element.inputId);
                     const newState = state.map((element) => {
                         if('input-' + element.inputId === e.target.id) {
                             return {
@@ -177,15 +178,12 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                                     onBlur={handleErrorOnBlur(element)}
                                 />
                             </div>
-                            <div className="slds-form-element__help" id="input-error-1" role={renderRole()}>{renderErrorText(element)}</div>
+                            <div className="slds-form-element__help" id={"input-error-" + element.inputId} role={renderRole()}>{renderErrorText(element)}</div>
                         </div>
                     )})}
             </form>
         )
     };  // End renderForm function
-
-    const setFocus = () => {
-    };
 
     const focusInput = (e) => {
         return (e) => {
