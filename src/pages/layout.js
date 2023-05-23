@@ -17,7 +17,7 @@ const LayoutPage = ({ currentUrl }) => {
             <nav className="bg-white pvs df df-end">
                 <Button
                     assistiveText={{ icon: 'Page Settings' }}
-                    className="mhm"
+                    className="mvs mhm"
                     id="settingsButtonRef"
                     iconCategory="utility"
                     iconName="settings"

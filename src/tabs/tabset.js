@@ -21,10 +21,10 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
         { index: 0, id: '0_tab', ref: tab0_ref, title: 'Company Details', content: <Details />},
         { index: 1, id: '1_tab', ref: tab1_ref, title: 'Admins', content: <Pills /> },
         { index: 2, id: '2_tab', ref: tab2_ref, title: 'Accounts', content: <DataTableExample data={dummyData.accounts}/> },
-        { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: <DataTableExample data={dummyData.accounts}/>} ,
-        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: <DataTableExample data={dummyData.accounts}/> },
-        { index: 5, id: '5_tab', ref: tab5_ref, title: 'Reports', content: <DataTableExample data={dummyData.accounts}/>},
-        { index: 6, id: '6_tab', ref: tab6_ref, title: 'Favorites', content:  <DataTableExample data={dummyData.accounts}/>},
+        { index: 3, id: '3_tab', ref: tab3_ref, title: 'Opportunities', content: <DataTableExample data={dummyData.opptys}/>} ,
+        { index: 4, id: '4_tab', ref: tab4_ref, title: 'Cases', content: <DataTableExample data={dummyData.cases}/> },
+        { index: 5, id: '5_tab', ref: tab5_ref, title: 'Reports', content: <DataTableExample data={dummyData.reports}/>},
+        { index: 6, id: '6_tab', ref: tab6_ref, title: 'Favorites', content:  <DataTableExample data={dummyData.favorites}/>},
     ];
 
     let [currentTab, setCurrentTab] = useState(tabData[0]);
@@ -141,7 +141,7 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
     };
 
     return (
-        <div className="slds-tabs_default" role={ html == 'landmark' ? 'article' : 'none' }>
+        <div className="slds-tabs_default tabset bg-white mhl border-rounded pam" role={ html == 'landmark' ? 'article' : 'none' }>
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}

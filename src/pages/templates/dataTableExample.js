@@ -16,7 +16,7 @@ const CustomDataTableCell = ({ children, ...props }) => (
 const columns = [
 	<DataTableColumn
 		key="opportunity"
-		label="Opportunity Name"
+		label="Name"
 		property="opportunityName"
 	>
 		<CustomDataTableCell />
@@ -29,21 +29,11 @@ const columns = [
 	/>,
 
 	<DataTableColumn key="close-date" label="Close Date" property="closeDate" />,
-
-	<DataTableColumn key="stage" label="Stage" property="stage" />,
-
-	<DataTableColumn key="confidence" label="Confidence" property="confidence" />,
-
-	<DataTableColumn key="amount" label="Amount" property="amount" />,
-
-	<DataTableColumn key="contact" label="Contact" property="contact">
-		<CustomDataTableCell />
-	</DataTableColumn>,
 ];
 
 const DatatableExample = ({ data }) => {
     return (
-        <div className="mvm">
+        <div className="mvm ofx-scroll">
             <DataTable items={data} id="DataTableExample-1-default">
                 {columns}
             </DataTable>
