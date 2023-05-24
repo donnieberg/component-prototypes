@@ -78,8 +78,10 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                 if(e.target.value.length < 1) {
                   elementHasError = true;  
                   formInput.classList.add("slds-has-error");
+                  setTimeout(() => {
                     e.target.setAttribute("aria-invalid", true);
                     e.target.setAttribute("aria-describedby", "input-error-" + element.inputId);
+                  }, 300);  
                 }  // End if the input is empty
                 else elementHasError = false;
             }
