@@ -30,7 +30,7 @@ const RecordHomePage = () => {
         { id: 'divider-4', type: 'divider', labels: { label: 'Input Errors'}},
         { id: 'inputError', labels: { label: 'Form Errors - error message status'}, options: ['none', 'status', 'alert'], currentOption: ariaLive, setOptionHandler: setAriaLive},
         { id: 'multipleErrors', labels: { label: 'Form Errors - keyboard focus'}, options: ['summary', 'first field'], currentOption: errorStyle, setOptionHandler: setErrorStyle},
-        { id: 'divider-5', type: 'divider', labels: { label: 'Input Errors'}},
+        { id: 'divider-5', type: 'divider', labels: { label: 'Links'}},
         { id: 'linkStyle', labels: { label: 'Link Style'}, options: ['Focus', 'Always', 'Paragraph', 'bold'], currentOption: linkStyle, setOptionHandler: setLinkStyle},
         { id: 'linkColor', labels: { label: 'Link Color'}, options: ['blue-40', 'blue-50'], currentOption: linkColor, setOptionHandler: setLinkColor},
     ];
