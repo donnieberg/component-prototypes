@@ -33,6 +33,7 @@ function MenuItem(props) {
                         'bg-hover': currentFocusIndex == index
                     })}
                     aria-checked={renderCheckMark ? 'true' : 'false'}
+                    aria-selected={renderCheckMark ? 'true' : 'false'}
                     onKeyDown={handleKeyDown(item)}
                     onClick={handleOnClick(item)}
                 >
