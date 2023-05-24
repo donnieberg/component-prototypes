@@ -78,14 +78,12 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                 if(e.target.value.length < 1) {
                   elementHasError = true;  
                   formInput.classList.add("slds-has-error");
+                  setTimeout(() => {
                     e.target.setAttribute("aria-invalid", true);
                     e.target.setAttribute("aria-describedby", "input-error-" + element.inputId);
+                  }, 300);  
                 }  // End if the input is empty
-                else {
-                  elementHasError = false;
-                  e.target.removeAttribute("aria-describedby");
-                  e.target.removeAttribute("aria-invalid");
-                }  // End else
+                else elementHasError = false;
             }
             const newState = state.map((element) => {
               if('input-' + element.inputId === e.target.id) {
@@ -108,15 +106,24 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
         else return;
     };  // End renderErrorText function
 
-    const handleChange = (e) => {
+    const handleChange = (element) => {
         return (e) => {
             e.stopPropagation();
+            let elementHasError = false;  
+            if(element.isRequired) {
+                  let formInput = element.inputRef.current;
+                  if(e.target.value.length > 0) {
+                    elementHasError = false;
+                    e.target.removeAttribute("aria-describedby");
+                    e.target.removeAttribute("aria-invalid");
+                  }  // End if the input is empty
+              }
             const newState = state.map((element) => {
                 if('input-' + element.inputId === e.target.id) {
                     return {
                         ...element,
                         inputValue: e.target.value,
-                        hasError: false
+                        hasError: elementHasError
                     }
                 } else return element;
             });
@@ -181,7 +188,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                                     type="text" 
                                     ref={element.inputId == "1" ? inputRef : element.inputRef}
                                     name={element.inputName}
-                                    onChange={handleChange()}
+                                    onChange={handleChange(element)}
                                     onBlur={handleErrorOnBlur(element)}
                                 />
                             </div>
