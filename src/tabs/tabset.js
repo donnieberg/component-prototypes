@@ -7,7 +7,7 @@ import Pills from '../pills/pills.js'
 import DataTableExample from '../pages/templates/dataTableExample.js'
 import dummyData from '../dummyData/data.js'
 
-function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
+function Tabs({ html, overflowBtn, pillBehavior, initialFocus, linkStyle, linkColor }) {
     const tab0_ref = useRef(null);
     const tab1_ref = useRef(null);
     const tab2_ref = useRef(null);
@@ -109,7 +109,7 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus }) {
 
     const renderDynamicContent = (data) => {
         if(data.id == '0_tab') {
-            return <Details initialFocus={initialFocus} /> 
+            return <Details initialFocus={initialFocus} linkStyle={linkStyle} linkColor={linkColor} /> 
         } else if(data.id == '1_tab') {
             return <Pills pillBehavior={pillBehavior} /> 
         } else {

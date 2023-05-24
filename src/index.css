@@ -44,6 +44,8 @@
     width: 600px;
 }
 
+
+
 body {
     margin: 0;
     height: 100%;
@@ -89,6 +91,7 @@ scrollbar-width: none;  // Firefox
 .pvm { padding-top: 1rem; padding-bottom: 1rem; }
 .pvs { padding-top: .5rem; padding-bottom: .5rem; }
 .pts { padding-top: .5rem; }
+.ptxs { padding-top: .25rem; }
 .ptm { padding-top: 1rem; }
 
 .mam { margin: 1rem; }
@@ -125,6 +128,7 @@ scrollbar-width: none;  // Firefox
 .width-100 { width: 100%; }
 
 .ofx-scroll {overflow-x: scroll; }
+.ofy-scroll {overflow-y: scroll; }
 
 
 /*
@@ -140,6 +144,9 @@ scrollbar-width: none;  // Firefox
 .circle { border-radius: 50%; }
 
 .bold { font-weight: bold; }
+.underline { text-decoration: underline !important; }
 
+.blue-40 { color: #0b5cab; }
+.blue-50 { color: #0176d3; }
 
 

@@ -16,6 +16,8 @@ const RecordHomePage = () => {
     let [ariaLive, setAriaLive] = useState('none');
     let [hasError, setHasError] = useState(false);
     let [errorStyle, setErrorStyle] = useState('summary');
+    let [linkStyle, setLinkStyle] = useState('Focus');
+    let [linkColor, setLinkColor] = useState('blue-40');
 
     const settings = [
         { id: 'divider-1', type: 'divider', labels: { label: 'Tabs'}},
@@ -28,6 +30,9 @@ const RecordHomePage = () => {
         { id: 'divider-4', type: 'divider', labels: { label: 'Input Errors'}},
         { id: 'inputError', labels: { label: 'Form Errors - error message status'}, options: ['none', 'status', 'alert'], currentOption: ariaLive, setOptionHandler: setAriaLive},
         { id: 'multipleErrors', labels: { label: 'Form Errors - keyboard focus'}, options: ['summary', 'first field'], currentOption: errorStyle, setOptionHandler: setErrorStyle},
+        { id: 'divider-5', type: 'divider', labels: { label: 'Input Errors'}},
+        { id: 'linkStyle', labels: { label: 'Link Style'}, options: ['Focus', 'Always', 'Paragraph', 'bold'], currentOption: linkStyle, setOptionHandler: setLinkStyle},
+        { id: 'linkColor', labels: { label: 'Link Color'}, options: ['blue-40', 'blue-50'], currentOption: linkColor, setOptionHandler: setLinkColor},
     ];
 
     return (
@@ -41,10 +46,12 @@ const RecordHomePage = () => {
                     hasError={hasError}
                     setHasError={setHasError}
                     errorStyle={errorStyle}
+                    linkStyle={linkStyle} 
+                    linkColor={linkColor} 
                 />
                 <section className="df df-spaceBetween">
-                    <Tabset html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} initialFocus={initialFocus} />
-                    <News />
+                    <Tabset linkStyle={linkStyle} linkColor={linkColor} html={markup} overflowBtn={keyboard} pillBehavior={pillBehavior} initialFocus={initialFocus} />
+                    <News linkStyle={linkStyle} linkColor={linkColor} />
                 </section>
             </div>
             {panelOpen ? <Panel settings={settings} /> : null }
