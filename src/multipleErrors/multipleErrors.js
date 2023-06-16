@@ -77,7 +77,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                 let formInput = element.inputRef.current;
                 if(e.target.value.length < 1) {
                   elementHasError = true;  
-                  formInput.classList.add("slds-has-error");
+                  //formInput.classList.add("slds-has-error");
                   setTimeout(() => {
                     e.target.setAttribute("aria-invalid", true);
                     e.target.setAttribute("aria-describedby", "input-error-" + element.inputId);
@@ -97,6 +97,18 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
         }
     };  // End handleOnBlur event handler
 
+    const handleFormCancel = (event) => {
+        state.forEach((element) => {
+            if(element.hasError) {
+                removeAriaAttributes(element.inputRef.current);
+            }  // End if element hasError
+        });
+        setDisplayErrors(false);
+        setNumberOfErrors(0);
+        setState(initialFormFields);
+        handleCancel(event);
+    };  // End handleFormCancel function
+
     const renderErrorText = (element) => {
         if(element.hasError) {
             return (
@@ -106,6 +118,11 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
         else return;
     };  // End renderErrorText function
 
+    const removeAriaAttributes = (element) => {
+        element.removeAttribute("aria-describedby");
+        element.removeAttribute("aria-invalid");
+    };  // 
+
     const handleChange = (element) => {
         return (e) => {
             e.stopPropagation();
@@ -114,9 +131,8 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                   let formInput = element.inputRef.current;
                   if(e.target.value.length > 0) {
                     elementHasError = false;
-                    e.target.removeAttribute("aria-describedby");
-                    e.target.removeAttribute("aria-invalid");
-                  }  // End if the input is empty
+                    removeAriaAttributes(e.target);
+                  }  // End if the input is not empty
               }
             const newState = state.map((element) => {
                 if('input-' + element.inputId === e.target.id) {
@@ -188,6 +204,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
                                     type="text" 
                                     ref={element.inputId == "1" ? inputRef : element.inputRef}
                                     name={element.inputName}
+                                    value={element.inputValue}
                                     onChange={handleChange(element)}
                                     onBlur={handleErrorOnBlur(element)}
                                 />
@@ -253,7 +270,7 @@ const MultipleErrors = ({ inputRef, errorStyle, ariaLive, handleCancel }) => {
             <div className="slds-modal__footer">
                 <Button 
                     label="Cancel"
-                    onClick={handleCancel}
+                    onClick={handleFormCancel}
                     variant="neutral"
                 />
                 <Button 
