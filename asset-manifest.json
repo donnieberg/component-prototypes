@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/component-prototypes/static/css/main.4d5d3ab6.css",
-    "main.js": "/component-prototypes/static/js/main.7c9c6833.js",
+    "main.css": "/component-prototypes/static/css/main.8d8d19dc.css",
+    "main.js": "/component-prototypes/static/js/main.04138e94.js",
     "static/js/787.28cb0dcd.chunk.js": "/component-prototypes/static/js/787.28cb0dcd.chunk.js",
     "static/media/bg-info@2x.png": "/component-prototypes/static/media/bg-info@2x.59f1b6c33ae7563bceea.png",
     "static/media/banner-group-public-default.png": "/component-prototypes/static/media/banner-group-public-default.502c03c164b28f5548b7.png",
     "static/media/banner-user-default.png": "/component-prototypes/static/media/banner-user-default.d4251dfc5e5f7164ce26.png",
     "static/media/banner-brand-default.png": "/component-prototypes/static/media/banner-brand-default.853be605e8ad0eac7451.png",
-    "static/media/einstein-figure.svg": "/component-prototypes/static/media/einstein-figure.160b004e87362bdab0f7.svg",
+    "static/media/einstein-figure.svg": "/component-prototypes/static/media/einstein-figure.4357761e5960da4966f0.svg",
     "static/media/einstein-header-background.svg": "/component-prototypes/static/media/einstein-header-background.89d89981681a11da4aea.svg",
     "static/media/logo.svg": "/component-prototypes/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/component-prototypes/index.html",
     "static/media/logo-noname.svg": "/component-prototypes/static/media/logo-noname.6481e0b2155ed5945f02.svg",
-    "main.4d5d3ab6.css.map": "/component-prototypes/static/css/main.4d5d3ab6.css.map",
-    "main.7c9c6833.js.map": "/component-prototypes/static/js/main.7c9c6833.js.map",
+    "main.8d8d19dc.css.map": "/component-prototypes/static/css/main.8d8d19dc.css.map",
+    "main.04138e94.js.map": "/component-prototypes/static/js/main.04138e94.js.map",
     "787.28cb0dcd.chunk.js.map": "/component-prototypes/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4d5d3ab6.css",
-    "static/js/main.7c9c6833.js"
+    "static/css/main.8d8d19dc.css",
+    "static/js/main.04138e94.js"
   ]
 }
