@@ -43,10 +43,11 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus, linkStyle, linkCo
                 } else {
                     nextFocusTab = currentData[index + 1];
                 }  
-            } else if (e.keyCode == utils.keys.left) {
+            } else if(e.keyCode == utils.keys.left) {
+                setOpenDropdown(openDropdown = false);
                 nextFocusTab = currentData[index - 1];
             } else if(e.keyCode == utils.keys.down) {
-                if(overflowBtn == 'arrow') {
+                if(overflowBtn == 'arrow' && currentTab.id == 'overflowBtnTab') {
                     setOpenDropdown(openDropdown = true);
                 }
             }
