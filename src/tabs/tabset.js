@@ -44,7 +44,9 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus, linkStyle, linkCo
                     nextFocusTab = currentData[index + 1];
                 }  
             } else if(e.keyCode == utils.keys.left) {
-                setOpenDropdown(openDropdown = false);
+                if(currentTab.id == 'overflowBtnTab') {
+                    setOpenDropdown(openDropdown = false);
+                }
                 nextFocusTab = currentData[index - 1];
             } else if(e.keyCode == utils.keys.down) {
                 if(overflowBtn == 'arrow' && currentTab.id == 'overflowBtnTab') {
