@@ -38,19 +38,25 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus, linkStyle, linkCo
 
             if(e.keyCode == utils.keys.right) {
                 if(index >= 3 && overflowBtn == 'arrow'){
-                    overflowBtnRef.current.focus() 
+                    //overflowBtnRef.current.focus() 
                     nextFocusTab = { id: 'overflowBtnTab' };
                 } else {
                     nextFocusTab = currentData[index + 1];
                 }  
-            } else if (e.keyCode == utils.keys.left) {
+            } else if(e.keyCode == utils.keys.left) {
+                if(currentTab.id == 'overflowBtnTab') {
+                    setOpenDropdown(openDropdown = false);
+                }
                 nextFocusTab = currentData[index - 1];
             } else if(e.keyCode == utils.keys.down) {
-                if(overflowBtn == 'arrow') {
+                if(overflowBtn == 'arrow' && currentTab.id == 'overflowBtnTab') {
                     setOpenDropdown(openDropdown = true);
                 }
             }
-            nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
+            if(nextFocusTab && nextFocusTab.id == 'overflowBtnTab') {
+                nextFocusEl = overflowBtnRef.current.firstElementChild.firstElementChild;
+            }
+            else nextFocusEl = nextFocusTab && document.getElementById(nextFocusTab.id);
             if(nextFocusEl) {
                 nextFocusEl.focus()
                 setCurrentTab(currentTab = nextFocusTab)
@@ -145,13 +151,14 @@ function Tabs({ html, overflowBtn, pillBehavior, initialFocus, linkStyle, linkCo
             {renderHeading()}
             <ul className="slds-tabs_default__nav" role="tablist">
                 {tabTitles}
-                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex={overflowBtn == 'tab' ? '-1' : '0'} className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
+                <li id="overflowBtnTab" ref={overflowBtnRef} onKeyDown={handleKeyDown(4)} tabIndex='-1' className="slds-tabs_default__item slds-tabs_default__overflow-button" role="presentation">
                     <DropdownMenu 
                         data={currentData.slice(4)} 
                         label="More"
                         handleMenuSelection={handleMenuSelection}
                         openDropdown={openDropdown}
-                        overflowBtn={overflowBtn}
+                        overflowBtn={overflowBtn == 'tab' ? 'tab' : 
+                        (currentTab.id == 'overflowBtnTab' ? 'tab' : 'arrow')}
                         setOpenDropdown={setOpenDropdown}
                     />
                 </li>
